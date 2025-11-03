@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NoticIA - Crear cuenta</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#4cae4f",
+                        "background-light": "#f6f7f6",
+                        "background-dark": "#151d15",
+                        "surface-light": "#f1f3f1",
+                        "surface-dark": "#202a20",
+                        "text-light": "#131613",
+                        "text-dark": "#e1e3e1",
+                        "subtle-text-light": "#6c7f6d",
+                        "subtle-text-dark": "#9ca79c",
+                    },
+                    fontFamily: { display: ["Inter", "sans-serif"] },
+                    borderRadius: { full: "9999px" },
+                },
+            },
+        };
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="flex items-center justify-between p-4">
+        <a href="login.html"
+            class="logo-btn flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+            <img src="img/logo.png" alt="Logo NoticIA" class="h-8 w-8 object-contain" />
+        </a>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex flex-col flex-1 items-center justify-center px-4 py-8">
+        <section
+            class="w-full max-w-md bg-surface-light dark:bg-surface-dark rounded-lg shadow p-8 border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+            <div class="text-center mb-6">
+                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10">
+                    <span class="material-symbols-outlined text-primary text-4xl">person_add</span>
+                </div>
+                <h1 class="text-3xl font-bold leading-tight">Crear cuenta</h1>
+            </div>
+
+            <!-- FORMULARIO -->
+            <form id="registerForm" class="flex flex-col gap-4" novalidate>
+                <div class="flex flex-col">
+                    <label for="name" class="text-base font-medium pb-2">Nombre completo</label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">person</span>
+                        <input id="name" type="text" placeholder="Ingresa tu nombre completo" required />
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="email" class="text-base font-medium pb-2">Correo electrónico</label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">mail</span>
+                        <input id="email" type="email" placeholder="Ingresa tu correo electrónico" required />
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="phone" class="text-base font-medium pb-2">Teléfono <span
+                            class="text-subtle-text-light text-sm">(opcional)</span></label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">call</span>
+                        <input id="phone" type="tel" placeholder="Ingresa tu número de teléfono (opcional)" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="password" class="text-base font-medium pb-2">Contraseña</label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input id="password" type="password" placeholder="Crea una contraseña" required />
+                        <button type="button" id="togglePassword" class="icon-btn"
+                            aria-label="Mostrar u ocultar contraseña">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="confirmPassword" class="text-base font-medium pb-2">Confirmar contraseña</label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">lock_reset</span>
+                        <input id="confirmPassword" type="password" placeholder="Repite tu contraseña" required />
+                        <button type="button" id="toggleConfirmPassword" class="icon-btn"
+                            aria-label="Mostrar u ocultar contraseña">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pt-6 pb-4">
+                    <button type="submit" class="btn-primary relative overflow-hidden">
+                        <span class="btn-text">Registrarse</span>
+                        <span
+                            class="loader absolute left-1/2 top-1/2 hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin -translate-x-1/2 -translate-y-1/2"></span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="text-sm text-subtle-text-light dark:text-subtle-text-dark">
+                    ¿Ya tienes cuenta?
+                    <a href="login.html" class="text-primary font-bold hover:underline">Inicia sesión</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js" defer></script>
+</body>
+
+</html>

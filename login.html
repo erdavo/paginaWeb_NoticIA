@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NoticIA - Iniciar sesión</title>
+
+    <!-- Tailwind + fuentes -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#4cae4f",
+                        "background-light": "#f6f7f6",
+                        "background-dark": "#151d15",
+                        "surface-light": "#f1f3f1",
+                        "surface-dark": "#202a20",
+                        "text-light": "#131613",
+                        "text-dark": "#e1e3e1",
+                        "subtle-text-light": "#6c7f6d",
+                        "subtle-text-dark": "#9ca79c",
+                    },
+                    fontFamily: { display: ["Inter", "sans-serif"] },
+                    borderRadius: { full: "9999px" },
+                },
+            },
+        };
+    </script>
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="flex items-center justify-between p-4">
+        <a href="login.html"
+            class="logo-btn flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+            <img src="img/logo.png" alt="Logo NoticIA" class="h-8 w-8 object-contain" />
+        </a>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex flex-col flex-1 items-center justify-center px-4 py-8">
+        <section
+            class="w-full max-w-md bg-surface-light dark:bg-surface-dark rounded-lg shadow p-8 border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+            <div class="text-center mb-6">
+                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10">
+                    <span class="material-symbols-outlined text-primary text-4xl">login</span>
+                </div>
+                <h1 class="text-3xl font-bold leading-tight">Iniciar sesión</h1>
+            </div>
+
+            <!-- FORMULARIO -->
+            <form id="loginForm" class="flex flex-col gap-4" novalidate>
+                <div class="flex flex-col">
+                    <label for="email" class="text-base font-medium pb-2">Correo electrónico o teléfono</label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">mail</span>
+                        <input id="email" type="email" placeholder="Ingresa tu email o teléfono" required />
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="password" class="text-base font-medium pb-2">Contraseña</label>
+                    <div class="input-container">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input id="password" type="password" placeholder="Ingresa tu contraseña" required />
+                        <button type="button" id="togglePassword" class="icon-btn"
+                            aria-label="Mostrar u ocultar contraseña">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pt-2 text-right">
+                    <a href="cambiarcontrasenna.html" class="text-primary text-sm font-bold hover:underline">
+                        ¿Has olvidado la contraseña?
+                    </a>
+                </div>
+
+                <div class="pt-6 pb-4">
+                    <button type="submit" class="btn-primary">Iniciar sesión</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="text-sm text-subtle-text-light dark:text-subtle-text-dark">
+                    ¿No tienes cuenta todavía?
+                    <a href="register.html" class="text-primary font-bold hover:underline">Crea una cuenta</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js" defer></script>
+</body>
+
+</html>

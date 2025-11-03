@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoticIA - Cambiar contraseña</title>
+
+  <!-- Tailwind + fuentes -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Configuración de Tailwind -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#4cae4f",
+            "background-light": "#f6f7f6",
+            "background-dark": "#151d15",
+            "surface-light": "#f1f3f1",
+            "surface-dark": "#202a20",
+            "text-light": "#131613",
+            "text-dark": "#e1e3e1",
+            "subtle-text-light": "#6c7f6d",
+            "subtle-text-dark": "#9ca79c",
+          },
+          fontFamily: {
+            display: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body
+  class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header class="flex items-center justify-between p-4">
+    <div class="flex items-center gap-3">
+      <a href="login.html"
+        class="logo-btn flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+        <img src="img/logo.png" alt="Logo NoticIA" class="h-8 w-8 object-contain" />
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="flex flex-col flex-1 items-center justify-center px-4 py-8">
+    <div
+      class="w-full max-w-md bg-surface-light dark:bg-surface-dark rounded-lg shadow p-8 border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+      <div class="text-center mb-6">
+        <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10">
+          <span class="material-symbols-outlined text-primary" style="font-size: 32px;">lock_reset</span>
+        </div>
+        <h1 class="text-3xl font-bold leading-tight">Restablecer contraseña</h1>
+        <p class="text-subtle-text-light dark:text-subtle-text-dark mt-2 text-sm">
+          Introduce tu correo electrónico para recibir un enlace de recuperación.
+        </p>
+      </div>
+
+      <!-- FORMULARIO -->
+      <form id="resetForm" class="flex flex-col gap-4">
+        <!-- Email -->
+        <div class="flex flex-col">
+          <label for="resetEmail" class="text-base font-medium pb-2">Correo electrónico</label>
+          <div class="input-container">
+            <span class="material-symbols-outlined">mail</span>
+            <input id="resetEmail" type="email" placeholder="tuemail@ejemplo.com" required />
+          </div>
+        </div>
+
+        <!-- Botón principal -->
+        <div class="pt-6 pb-4">
+          <button type="submit" class="btn-primary">Enviar enlace</button>
+        </div>
+      </form>
+
+      <!-- Volver al login -->
+      <div class="text-center mt-4">
+        <p class="text-sm text-subtle-text-light dark:text-subtle-text-dark">
+          ¿Ya recuerdas tu contraseña?
+          <a href="login.html" class="text-primary font-bold hover:underline">Volver al inicio de sesión</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- JS global -->
+  <script src="js/script.js" defer></script>
+</body>
+
+</html>

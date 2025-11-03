@@ -1,0 +1,232 @@
+/* 🎨 Paleta y estilos comunes */
+:root {
+  --primary: #4cae4f;
+}
+
+/* Logo interactivo */
+.logo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background-color: rgba(76, 174, 79, 0.1);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: all 0.25s ease;
+}
+
+/* =====================================
+🎨 PALETA Y ESTILOS BASE
+===================================== */
+:root {
+  --primary: #4cae4f;
+  --text: #131613;
+  --muted: #6c7f6d;
+  --surface: #f1f3f1;
+  --bg: #f6f7f6;
+}
+
+/* Reset base */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+/* =====================================
+🌿 LOGO INTERACTIVO
+===================================== */
+.logo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background-color: rgba(76, 174, 79, 0.1);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.logo-btn:hover {
+  background-color: rgba(76, 174, 79, 0.2);
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(76, 174, 79, 0.35);
+}
+
+.logo-btn:active {
+  transform: scale(0.95);
+}
+
+/* =====================================
+✏️ INPUTS Y CAMPOS DE FORMULARIO
+===================================== */
+.input-container {
+  display: flex;
+  align-items: center;
+  border-radius: 0.75rem;
+  background-color: var(--surface);
+  padding: 0 1rem;
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+  border: 1px solid transparent;
+}
+
+.input-container:focus-within {
+  box-shadow: 0 0 0 2px var(--primary);
+  transform: scale(1.01);
+}
+
+.input-container input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  height: 3.5rem;
+  font-size: 1rem;
+  padding-left: 0.75rem;
+  color: var(--text);
+}
+
+.input-container input::placeholder {
+  color: var(--muted);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.icon-btn:hover {
+  color: var(--primary);
+  transform: scale(1.1);
+}
+
+/* =====================================
+🚀 BOTONES PRINCIPALES
+===================================== */
+.btn-primary {
+  width: 100%;
+  height: 3.5rem;
+  border: none;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(76, 174, 79, 0.25);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(76, 174, 79, 0.45);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 8px rgba(76, 174, 79, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =====================================
+✨ ACCESIBILIDAD Y FOCUS STATES
+===================================== */
+button:focus,
+input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.logo-btn:hover {
+  background-color: rgba(76, 174, 79, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(76, 174, 79, 0.3);
+}
+
+/* Inputs */
+.input-container {
+  display: flex;
+  align-items: center;
+  border-radius: 0.75rem;
+  background-color: var(--surface-light, #f1f3f1);
+  padding: 0 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.input-container:focus-within {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.input-container input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  height: 3.5rem;
+  font-size: 1rem;
+  padding-left: 0.75rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c7f6d;
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  color: var(--primary);
+}
+
+/* Botón principal con animación UI/UX */
+.btn-primary {
+  width: 100%;
+  height: 3.5rem;
+  border: none;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(76, 174, 79, 0.25);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(76, 174, 79, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+
+/* =====================================
+SECCIONES ESPECÍFICAS (opcional)
+===================================== */
+
+/* Página de foro */
+.foro-page main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Página de perfil */
+.perfil-page .profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

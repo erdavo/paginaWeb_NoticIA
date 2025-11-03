@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoticIA - Analizar Noticia</title>
+
+  <!-- Tailwind + fuentes -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#4cae4f",
+            "background-light": "#f6f7f6",
+            "background-dark": "#151d15",
+            "surface-light": "#f1f3f1",
+            "surface-dark": "#202a20",
+            "text-light": "#131613",
+            "text-dark": "#e1e3e1",
+            "subtle-text-light": "#6c7f6d",
+            "subtle-text-dark": "#9ca79c",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+</head>
+
+<body
+  class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header
+    class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <a href="index.html"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+        <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
+      </a>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="flex gap-8 text-base font-medium">
+      <a href="analizar.html" class="text-primary font-bold underline underline-offset-4">Analizar</a>
+      <a href="foro.html" class="hover:text-primary transition">Foro</a>
+      <a href="resumir.html" class="hover:text-primary transition">Resumir</a>
+      <a href="ia.html" class="hover:text-primary transition">Hablar con la IA</a>
+    </nav>
+
+    <!-- Perfil -->
+    <div class="flex flex-col items-center justify-center gap-1 cursor-pointer hover:opacity-80 transition">
+      <div
+        class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
+        <span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-3xl">person</span>
+      </div>
+      <span class="text-sm font-semibold text-text-light dark:text-text-dark">Mi perfil</span>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="flex flex-col items-center justify-start flex-1 px-4 py-10">
+    <h1 class="text-3xl font-bold mb-8">Analizar Noticia</h1>
+
+    <!-- Pestañas -->
+    <div class="flex gap-8 mb-8 text-lg font-semibold">
+      <button class="text-primary underline underline-offset-4">Texto</button>
+      <button class="hover:text-primary transition">Documento</button>
+      <button class="hover:text-primary transition">Enlace</button>
+    </div>
+
+    <!-- Área de texto -->
+    <div
+      class="w-full max-w-2xl bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+      <label for="texto" class="block text-base font-medium mb-3">Introduce el texto:</label>
+      <textarea id="texto" rows="6" placeholder="Escribe o pega aquí el texto de la noticia..."
+        class="w-full resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+    </div>
+
+    <!-- Botón -->
+    <button
+      class="mt-8 flex items-center justify-center w-40 h-14 bg-primary text-white rounded-full text-base font-bold tracking-wide hover:opacity-90 active:scale-95 transition-transform">
+      Analizar
+    </button>
+  </main>
+</body>
+
+</html>
