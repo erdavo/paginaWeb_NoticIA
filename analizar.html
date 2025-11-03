@@ -84,26 +84,59 @@
     <h1 class="text-3xl font-bold mb-8">Analizar Noticia</h1>
 
     <!-- Pestañas -->
-    <div class="flex gap-8 mb-8 text-lg font-semibold">
-      <button class="text-primary underline underline-offset-4">Texto</button>
-      <button class="hover:text-primary transition">Documento</button>
-      <button class="hover:text-primary transition">Enlace</button>
+    <div id="tabs" class="flex gap-8 mb-8 text-lg font-semibold">
+      <button data-tab="texto" class="tab-btn text-primary underline underline-offset-4">Texto</button>
+      <button data-tab="documento" class="tab-btn hover:text-primary transition">Documento</button>
+      <button data-tab="enlace" class="tab-btn hover:text-primary transition">Enlace</button>
     </div>
 
-    <!-- Área de texto -->
-    <div
-      class="w-full max-w-2xl bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
-      <label for="texto" class="block text-base font-medium mb-3">Introduce el texto:</label>
-      <textarea id="texto" rows="6" placeholder="Escribe o pega aquí el texto de la noticia..."
-        class="w-full resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+    <!-- Contenedor de contenido dinámico -->
+    <div id="tab-content" class="w-full max-w-2xl">
+      <!-- 🟢 CONTENIDO INICIAL: TEXTO -->
+      <div id="contenido-texto"
+        class="tab-content active bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+        <label for="texto" class="block text-base font-medium mb-3">Introduce el texto:</label>
+        <textarea id="texto" rows="6" placeholder="Escribe o pega aquí el texto de la noticia..."
+          class="w-full resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+      </div>
+
+      <!-- 🔵 CONTENIDO: DOCUMENTO -->
+      <div id="contenido-documento"
+        class="tab-content hidden bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-dashed border-primary/40 dark:border-primary/60 text-center">
+        <p class="text-base font-medium mb-4">Subir documento:</p>
+
+        <!-- Zona de carga -->
+        <div id="dropzone"
+          class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-subtle-text-light dark:border-subtle-text-dark rounded-lg hover:border-primary/60 transition cursor-pointer">
+          <span class="material-symbols-outlined text-5xl text-primary mb-2">upload</span>
+          <p class="text-subtle-text-light dark:text-subtle-text-dark text-sm">
+            Arrastra y suelta un archivo aquí o haz clic para seleccionarlo
+          </p>
+          <input type="file" id="fileInput" class="hidden" />
+        </div>
+
+        <!-- 📁 Lista de archivos subidos -->
+        <div id="uploaded-files" class="mt-6 flex flex-col gap-2 text-left"></div>
+      </div>
+
+
+      <!-- 🔴 CONTENIDO: ENLACE -->
+      <div id="contenido-enlace"
+        class="tab-content hidden bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+        <label for="enlace" class="block text-base font-medium mb-3">Introduce el enlace:</label>
+        <input id="enlace" type="url" placeholder="Pega aquí el enlace de la noticia..."
+          class="w-full rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none" />
+      </div>
     </div>
 
-    <!-- Botón -->
+    <!-- Botón principal -->
     <button
       class="mt-8 flex items-center justify-center w-40 h-14 bg-primary text-white rounded-full text-base font-bold tracking-wide hover:opacity-90 active:scale-95 transition-transform">
       Analizar
     </button>
   </main>
+
 </body>
+<script src="js/script.js" defer></script>
 
 </html>
