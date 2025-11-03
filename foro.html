@@ -15,6 +15,33 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toast {
+            animation: fadeIn 0.4s ease, fadeOut 0.4s ease 3s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+        }
     </style>
 
     <script>
@@ -23,7 +50,7 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#4cae4f",
+                        primary: "#4cae4f",
                         "background-light": "#f6f7f6",
                         "background-dark": "#151d15",
                         "surface-light": "#f1f3f1",
@@ -34,17 +61,11 @@
                         "subtle-text-dark": "#9ca79c",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.5rem",
-                        "lg": "0.75rem",
-                        "xl": "1rem",
-                        "full": "9999px"
+                        display: ["Inter", "sans-serif"],
                     },
                 },
             },
-        }
+        };
     </script>
 </head>
 
@@ -54,15 +75,13 @@
     <!-- HEADER -->
     <header
         class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
-        <!-- Logo -->
         <div class="flex items-center gap-3">
-            <a href="index.html"
+            <a href="analizar.html"
                 class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
                 <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
             </a>
         </div>
 
-        <!-- Navegación -->
         <nav class="flex gap-8 text-base font-medium">
             <a href="analizar.html" class="hover:text-primary transition">Analizar</a>
             <a href="foro.html" class="text-primary font-bold underline underline-offset-4">Foro</a>
@@ -70,7 +89,6 @@
             <a href="ia.html" class="hover:text-primary transition">Hablar con la IA</a>
         </nav>
 
-        <!-- Perfil -->
         <div class="flex flex-col items-center justify-center gap-1 cursor-pointer hover:opacity-80 transition">
             <div
                 class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
@@ -81,61 +99,118 @@
         </div>
     </header>
 
+    <!-- TOAST -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2"></div>
+
     <!-- CONTENIDO -->
-    <main class="flex flex-col items-center justify-start flex-1 px-4 py-10">
+    <main class="flex flex-col items-center flex-1 px-4 py-10">
         <h1 class="text-3xl font-bold mb-8">Foro de Noticias</h1>
 
-        <!-- Publicar nueva entrada -->
-        <div
-            class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 mb-10">
-            <label for="publicacion" class="block text-base font-medium mb-3">Escribe una nueva publicación:</label>
-            <textarea id="publicacion" rows="4" placeholder="Comparte tus ideas o una noticia reciente..."
-                class="w-full resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+        <!-- Tabs -->
+        <div id="foro-tabs"
+            class="flex justify-center gap-12 mb-10 text-lg font-semibold border-b border-subtle-text-light/30 dark:border-subtle-text-dark/30 pb-2">
+            <button data-tab="tendencias" class="foro-tab text-primary underline underline-offset-4">Tendencias</button>
+            <button data-tab="siguiendo" class="foro-tab hover:text-primary transition">Siguiendo</button>
+        </div>
 
-            <div class="flex justify-end mt-4">
-                <button
-                    class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform">
+        <!-- Publicar post -->
+        <div
+            class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 mb-10">
+            <div class="flex items-start gap-3 mb-4">
+                <span class="material-symbols-outlined text-4xl text-primary">account_circle</span>
+                <textarea id="inputPost" placeholder="Escribe aquí tu post..."
+                    class="w-full resize-none rounded-lg border border-subtle-text-light/40 dark:border-subtle-text-dark/40 bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none transition-all duration-200"></textarea>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div class="flex gap-4 text-subtle-text-light dark:text-subtle-text-dark">
+                    <span class="material-symbols-outlined cursor-pointer hover:text-primary transition">image</span>
+                    <span class="material-symbols-outlined cursor-pointer hover:text-primary transition">gif_box</span>
+                    <span class="material-symbols-outlined cursor-pointer hover:text-primary transition">mood</span>
+                    <span class="material-symbols-outlined cursor-pointer hover:text-primary transition">link</span>
+                    <span
+                        class="material-symbols-outlined cursor-pointer hover:text-primary transition">format_list_bulleted</span>
+                </div>
+
+                <button id="publicarBtn"
+                    class="px-6 py-2 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform">
                     Publicar
                 </button>
             </div>
         </div>
 
-        <!-- Lista de publicaciones -->
-        <section class="w-full max-w-3xl flex flex-col gap-6">
-            <!-- Ejemplo de publicación -->
+        <!-- 📌 Contenido dinámico -->
+        <section id="contenido-tendencias" class="foro-section w-full max-w-3xl flex flex-col gap-6 fade-in">
+            <!-- Post de ejemplo -->
             <article
-                class="bg-surface-light dark:bg-surface-dark p-5 rounded-lg border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-semibold text-lg">Impacto de la IA en el periodismo</h3>
-                    <span class="text-sm text-subtle-text-light dark:text-subtle-text-dark">hace 2h</span>
+                class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-text-light/50 dark:border-text-dark/50 shadow-md">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="material-symbols-outlined text-4xl text-primary">account_circle</span>
+                    <div>
+                        <p class="font-semibold">Paco <span
+                                class="text-subtle-text-light dark:text-subtle-text-dark">@tupaco33</span></p>
+                        <p class="text-sm text-subtle-text-light dark:text-subtle-text-dark">hace 13h</p>
+                    </div>
                 </div>
-                <p class="text-base text-subtle-text-light dark:text-subtle-text-dark mb-4">
-                    ¿Qué opinan sobre el uso de herramientas de inteligencia artificial para redactar noticias?
+                <p class="text-base text-text-light dark:text-text-dark mb-2">
+                    ¡Shavalee! 😆 Mira esta noticia, es falsa:
                 </p>
-                <div class="flex items-center justify-between">
-                    <button class="text-primary font-medium hover:underline">Responder</button>
-                    <span class="text-sm text-subtle-text-light dark:text-subtle-text-dark">5 comentarios</span>
+                <a href="https://noticiafalsa.com" target="_blank"
+                    class="text-primary font-medium hover:underline break-all">https://noticiafalsa.com ↗</a>
+                <div class="flex gap-8 mt-4 text-subtle-text-light dark:text-subtle-text-dark">
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">chat_bubble</span><span class="text-sm">12</span>
+                    </div>
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">favorite</span><span class="text-sm">106</span>
+                    </div>
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">bookmark</span><span class="text-sm">3</span>
+                    </div>
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">share</span><span class="text-sm">4</span>
+                    </div>
                 </div>
             </article>
+        </section>
 
+        <section id="contenido-siguiendo" class="foro-section w-full max-w-3xl flex flex-col gap-6 hidden">
             <article
-                class="bg-surface-light dark:bg-surface-dark p-5 rounded-lg border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-semibold text-lg">Nuevas leyes sobre noticias falsas</h3>
-                    <span class="text-sm text-subtle-text-light dark:text-subtle-text-dark">ayer</span>
+                class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-text-light/50 dark:border-text-dark/50 shadow-md">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="material-symbols-outlined text-4xl text-primary">account_circle</span>
+                    <div>
+                        <p class="font-semibold">Laura <span
+                                class="text-subtle-text-light dark:text-subtle-text-dark">@launews</span></p>
+                        <p class="text-sm text-subtle-text-light dark:text-subtle-text-dark">hace 5h</p>
+                    </div>
                 </div>
-                <p class="text-base text-subtle-text-light dark:text-subtle-text-dark mb-4">
-                    Algunos países están impulsando regulaciones más estrictas sobre el contenido generado por IA.
-                    ¿Creen que es positivo?
+                <p class="text-base text-text-light dark:text-text-dark mb-2">
+                    Estoy analizando cómo NoticIA detecta sesgos en tiempo real, ¡impresionante!
                 </p>
-                <div class="flex items-center justify-between">
-                    <button class="text-primary font-medium hover:underline">Responder</button>
-                    <span class="text-sm text-subtle-text-light dark:text-subtle-text-dark">12 comentarios</span>
+                <a href="https://noticiafalsa.com" target="_blank"
+                    class="text-primary font-medium hover:underline break-all">https://noticiafalsa.com ↗</a>
+                <div class="flex gap-8 mt-4 text-subtle-text-light dark:text-subtle-text-dark">
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">chat_bubble</span><span class="text-sm">12</span>
+                    </div>
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">favorite</span><span class="text-sm">106</span>
+                    </div>
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">bookmark</span><span class="text-sm">3</span>
+                    </div>
+                    <div class="flex items-center gap-1 hover:text-primary cursor-pointer transition">
+                        <span class="material-symbols-outlined">share</span><span class="text-sm">4</span>
+                    </div>
                 </div>
             </article>
         </section>
     </main>
+
+    <!-- SCRIPT -->
+    <script src="js/script.js"></script>
+
 </body>
-<script src="js/script.js" defer></script>
 
 </html>

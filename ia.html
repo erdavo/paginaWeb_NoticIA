@@ -48,12 +48,15 @@
   </script>
 </head>
 
-<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+<body
+  class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
   <!-- HEADER (mismo estilo que Foro) -->
-  <header class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+  <header
+    class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
     <!-- Logo -->
     <div class="flex items-center gap-3">
-      <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+      <a href="analizar.html"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
       </a>
     </div>
@@ -68,7 +71,8 @@
 
     <!-- Perfil -->
     <div class="flex flex-col items-center justify-center gap-1 cursor-pointer hover:opacity-80 transition">
-      <div class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
+      <div
+        class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
         <span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-3xl">person</span>
       </div>
       <span class="text-sm font-semibold text-text-light dark:text-text-dark">Mi perfil</span>
@@ -80,25 +84,31 @@
     <h1 class="text-3xl font-bold mb-8">Chat con NoticIA</h1>
 
     <!-- Chat container -->
-    <section class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-0 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 overflow-hidden">
+    <section
+      class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-0 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 overflow-hidden">
       <!-- Historial -->
-      <div id="mensajes" class="h-[55vh] min-h-[320px] max-h-[70vh] overflow-y-auto p-6 space-y-4 bg-surface-light dark:bg-surface-dark">
+      <div id="mensajes"
+        class="h-[55vh] min-h-[320px] max-h-[70vh] overflow-y-auto p-6 space-y-4 bg-surface-light dark:bg-surface-dark">
         <!-- Mensaje inicial de sistema -->
         <div class="flex items-start gap-3">
           <div class="flex-none w-9 h-9 rounded-full overflow-hidden bg-primary/15 flex items-center justify-center">
             <img src="img/logo.png" alt="Logo IA" class="w-6 h-6 object-contain" />
           </div>
-          <div class="bg-background-light dark:bg-background-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 rounded-lg px-4 py-3 max-w-[85%]">
+          <div
+            class="bg-background-light dark:bg-background-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 rounded-lg px-4 py-3 max-w-[85%]">
             <p class="text-sm">¡Hola! Soy NoticIA. Pregúntame sobre noticias, resúmenes o análisis.</p>
           </div>
         </div>
       </div>
 
       <!-- Composer -->
-      <div class="p-4 bg-surface-light/80 dark:bg-surface-dark/80 border-t border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+      <div
+        class="p-4 bg-surface-light/80 dark:bg-surface-dark/80 border-t border-subtle-text-light/20 dark:border-subtle-text-dark/20">
         <form id="form" class="flex items-end gap-3">
-          <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje..." class="flex-1 resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-3 text-base placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
-          <button id="enviar" type="submit" class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed">
+          <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje..."
+            class="flex-1 resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-3 text-base placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+          <button id="enviar" type="submit"
+            class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed">
             Enviar
           </button>
         </form>
