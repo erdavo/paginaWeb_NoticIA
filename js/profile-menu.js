@@ -1,4 +1,4 @@
-// js/profile-menu.js — Perfil con estilo + “Mis publicaciones”
+// js/profile-menu.js — Perfil con estilo + “Mis publicaciones” + Selector de Idioma desplegable
 
 (function () {
   if (window.__noticiaProfileMenuMounted) return;
@@ -17,11 +17,16 @@
   if (isNaN(following)) following = 389;
 
   var lang = (localStorage.getItem(LANG_KEY) || "es").toLowerCase();
-  var langFlag = flagFromLang(lang); // 🇪🇸 por defecto
+  var langFlag = flagFromLang(lang);
+  var langName = nameFromLang(lang);
 
   function flagFromLang(code) {
-    var map = { es: "🇪🇸", en: "🇬🇧", fr: "🇫🇷", de: "🇩🇪", it: "🇮🇹", pt: "🇵🇹" };
+    var map = { es:"🇪🇸", en:"🇬🇧", fr:"🇫🇷", de:"🇩🇪", it:"🇮🇹", pt:"🇵🇹" };
     return map[code] || "🏳️";
+  }
+  function nameFromLang(code) {
+    var map = { es:"Español", en:"English", fr:"Français", de:"Deutsch", it:"Italiano", pt:"Português" };
+    return map[code] || code.toUpperCase();
   }
 
   // Quitar bloque antiguo si quedó
@@ -88,30 +93,42 @@
     '      <div class="text-xl font-semibold text-gray-900 dark:text-text-dark">Hola, ' + escapeHtml(firstName(username)) + "</div>" +
     "    </div>" +
     '    <nav class="flex-1 overflow-y-auto">' +
-    sectionLink("perfil.html", "person", "Perfil") +
-    sectionLink("mis-publicaciones.html", "article", "Mis publicaciones") + // <-- NUEVO
-    sectionLink("guardados.html#posts", "bookmarks", "Publicaciones guardadas") +
-    sectionLink("guardados.html#resumenes", "notes", "Resúmenes guardados") +
-    '      <div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
-    sectionLink("preferencias.html", "tune", "Preferencias") +
-    '      <button type="button" id="btn-idioma" role="menuitem" ' +
-    '        class="w-full text-left px-5 py-3 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-background-dark/60">' +
-    '        <span class="material-symbols-outlined">language</span>' +
-    '        <span class="flex-1">Idioma</span>' +
-    '        <span class="text-2xl leading-none" title="Idioma actual">' + langFlag + "</span>" +
-    "      </button>" +
-    '      <div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
-    '      <button type="button" id="btn-logout" role="menuitem" ' +
-    '        class="w-full text-left px-5 py-3 flex items-center gap-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">' +
-    '        <span class="material-symbols-outlined">logout</span>' +
-    '        <span class="flex-1">Cerrar sesión</span>' +
-    '        <span class="material-symbols-outlined">arrow_forward</span>' +
-    "      </button>" +
+      sectionLink("perfilusuario.html#mis-publicaciones", "person", "Perfil") +
+      sectionLink("perfilusuario.html#mis-publicaciones", "article", "Mis publicaciones") +
+      sectionLink("perfilusuario.html#publicaciones-guardadas", "bookmarks", "Publicaciones guardadas") +
+      sectionLink("perfilusuario.html#resumenes-guardados", "notes", "Resúmenes guardados") +
+      // separador
+      '<div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
+      // ===== Selector de Idioma (desplegable)
+      '<div class="px-5 py-1">' +
+      '  <button type="button" id="lang-toggle" aria-expanded="false" ' +
+      '    class="w-full text-left px-0 py-2 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-background-dark/60 rounded">' +
+      '    <span class="material-symbols-outlined">language</span>' +
+      '    <span class="flex-1">Idioma</span>' +
+      '    <span id="lang-current" class="inline-flex items-center gap-2 text-sm">' +
+      '      <span class="text-xl leading-none">' + langFlag + '</span>' +
+      '      <span>' + langName + '</span>' +
+      '    </span>' +
+      '    <span id="lang-arrow" class="material-symbols-outlined transition-transform duration-200">expand_more</span>' +
+      '  </button>' +
+      '  <div id="lang-menu" class="hidden mt-2 border border-gray-200 dark:border-subtle-text-dark/20 rounded-md overflow-hidden">' +
+           langItem("es") + langItem("en") + langItem("fr") + langItem("de") + langItem("it") + langItem("pt") +
+      '  </div>' +
+      '</div>' +
+      // separador
+      '<div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
+      // Cerrar sesión
+      '<button type="button" id="btn-logout" role="menuitem" ' +
+      '  class="w-full text-left px-5 py-3 flex items-center gap-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">' +
+      '  <span class="material-symbols-outlined">logout</span>' +
+      '  <span class="flex-1">Cerrar sesión</span>' +
+      '  <span class="material-symbols-outlined">arrow_forward</span>' +
+      '</button>' +
     "    </nav>" +
     "  </div>" +
     "</aside>";
 
-  // Helpers
+  // Helpers de render
   function sectionLink(href, icon, label) {
     return (
       '<a href="' + href + '" role="menuitem" ' +
@@ -119,6 +136,16 @@
       '  <span class="material-symbols-outlined">' + icon + "</span>" +
       '  <span class="flex-1">' + label + "</span>" +
       "</a>"
+    );
+  }
+  function langItem(code) {
+    return (
+      '<button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-background-dark/60" ' +
+      '        data-lang="' + code + '">' +
+      '  <span class="text-xl">' + flagFromLang(code) + '</span>' +
+      '  <span class="flex-1">' + nameFromLang(code) + '</span>' +
+      (code === lang ? '<span class="material-symbols-outlined text-primary">check</span>' : '') +
+      '</button>'
     );
   }
   function firstName(full) {
@@ -179,18 +206,41 @@
   window.addEventListener("scroll", setDrawerTop);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDrawer(); });
 
-  // Acciones
-  var idiomaBtn = root.querySelector("#btn-idioma");
-  if (idiomaBtn) idiomaBtn.addEventListener("click", function () {
-    var next = (lang === "es") ? "en" : "es";
-    localStorage.setItem(LANG_KEY, next);
-    location.reload();
-  });
+  // Acciones: Idioma (toggle desplegable + seleccionar)
+  var langToggle = root.querySelector("#lang-toggle");
+  var langMenu = root.querySelector("#lang-menu");
+  var langArrow = root.querySelector("#lang-arrow");
 
+  if (langToggle && langMenu) {
+    langToggle.addEventListener("click", function () {
+      var open = !langMenu.classList.contains("hidden");
+      if (open) {
+        langMenu.classList.add("hidden");
+        langToggle.setAttribute("aria-expanded", "false");
+        langArrow.classList.remove("rotate-180");
+      } else {
+        langMenu.classList.remove("hidden");
+        langToggle.setAttribute("aria-expanded", "true");
+        langArrow.classList.add("rotate-180");
+      }
+    });
+
+    langMenu.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-lang]");
+      if (!btn) return;
+      var newLang = btn.getAttribute("data-lang");
+      localStorage.setItem(LANG_KEY, newLang);
+      location.reload();
+    });
+  }
+
+  // Acciones: Logout
   var logoutBtn = root.querySelector("#btn-logout");
-  if (logoutBtn) logoutBtn.addEventListener("click", function () {
-    localStorage.removeItem("auth_token");
-    closeDrawer();
-    location.href = "login.html";
-  });
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+      localStorage.removeItem("auth_token");
+      closeDrawer();
+      location.href = "login.html";
+    });
+  }
 })();
