@@ -55,12 +55,13 @@
     class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
     <!-- Logo -->
     <div class="flex items-center gap-3">
-    <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
+      <a href="index.html"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
-    </a>
-    <a href="index.html" class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
+      </a>
+      <a href="index.html" class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
         NoticIA
-    </a>
+      </a>
     </div>
 
     <!-- Navegación -->
@@ -71,10 +72,16 @@
       <a href="ia.html" class="hover:text-primary transition">Hablar con la IA</a>
     </nav>
 
-    <!-- Perfil --> 
-  <div id="profile-menu-root"></div>
+    <!-- Perfil -->
+    <div class="flex flex-col items-center justify-center gap-1 cursor-pointer hover:opacity-80 transition">
+      <div
+        class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
+        <span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-3xl">person</span>
+      </div>
+      <span class="text-sm font-semibold text-text-light dark:text-text-dark">Mi perfil</span>
+    </div>
   </header>
-  
+
   <!-- CONTENIDO -->
   <main class="flex flex-col items-center justify-start flex-1 px-4 py-10">
     <h1 class="text-3xl font-bold mb-8">Resumir texto</h1>
@@ -173,6 +180,5 @@
     });
   </script>
 </body>
-<script src="js/profile-menu.js"></script>
 
 </html>
