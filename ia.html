@@ -48,15 +48,12 @@
   </script>
 </head>
 
-<body
-  class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
   <!-- HEADER (mismo estilo que Foro) -->
-  <header
-    class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+  <header id="app-header" class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
     <!-- Logo -->
     <div class="flex items-center gap-3">
-      <a href="analizar.html"
-        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+      <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
       </a>
     </div>
@@ -70,45 +67,56 @@
     </nav>
 
     <!-- Perfil -->
-    <div class="flex flex-col items-center justify-center gap-1 cursor-pointer hover:opacity-80 transition">
-      <div
-        class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
-        <span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-3xl">person</span>
-      </div>
-      <span class="text-sm font-semibold text-text-light dark:text-text-dark">Mi perfil</span>
-    </div>
+  <div id="profile-menu-root"></div>
   </header>
 
+
+  <!-- BOTÓN HISTORIAL (debajo de cabecera, izquierda) -->
+  <div class="relative px-8 mt-3">
+    <button id="historial-toggle" class="flex items-center gap-2 px-4 py-2 rounded-full border border-subtle-text-light/30 dark:border-subtle-text-dark/30 bg-surface-light dark:bg-surface-dark hover:bg-surface-light/80 dark:hover:bg-surface-dark/80 shadow-sm active:scale-95 transition">
+      <span class="material-symbols-outlined text-primary">menu_open</span>
+      <span class="font-medium">Historial</span>
+    </button>
+  </div>
+
+  <!-- Drawer lateral (izquierda -> derecha) -->
+  <aside id="historial-drawer" class="fixed left-0 hidden w-[320px] max-w-[90vw] h-[calc(100vh-var(--top,72px))] overflow-hidden z-30 translate-x-[-100%] transition-transform duration-300">
+    <div class="h-full flex flex-col bg-surface-light dark:bg-surface-dark border-r border-subtle-text-light/30 dark:border-subtle-text-dark/30 shadow-xl">
+      <div class="p-3 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <img src="img/logo.png" alt="Logo IA" class="w-6 h-6"/>
+          <span class="text-sm font-semibold">Historial</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="nueva-conv" class="text-xs px-3 py-1.5 rounded-full bg-primary text-white font-semibold hover:opacity-90 active:scale-95 transition">Nueva conversación</button>
+          <button id="cerrar-drawer" class="p-1 rounded hover:bg-background-light/70 dark:hover:bg-background-dark/70">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <ul id="lista-convos" class="flex-1 overflow-y-auto divide-y divide-subtle-text-light/10 dark:divide-subtle-text-dark/10">
+        <!-- Items renderizados por JS -->
+      </ul>
+    </div>
+  </aside>
+  <div id="drawer-overlay" class="hidden fixed inset-0 bg-black/20 backdrop-blur-[1px] z-20"></div>
+
   <!-- CONTENIDO -->
-  <main class="flex flex-col items-center justify-start flex-1 px-4 py-10">
-    <h1 class="text-3xl font-bold mb-8">Chat con NoticIA</h1>
+  <main class="flex flex-col items-center justify-start flex-1 px-4 py-6">
+    <h1 class="text-3xl font-bold mb-6">Chat con NoticIA</h1>
 
     <!-- Chat container -->
-    <section
-      class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-0 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 overflow-hidden">
-      <!-- Historial -->
-      <div id="mensajes"
-        class="h-[55vh] min-h-[320px] max-h-[70vh] overflow-y-auto p-6 space-y-4 bg-surface-light dark:bg-surface-dark">
-        <!-- Mensaje inicial de sistema -->
-        <div class="flex items-start gap-3">
-          <div class="flex-none w-9 h-9 rounded-full overflow-hidden bg-primary/15 flex items-center justify-center">
-            <img src="img/logo.png" alt="Logo IA" class="w-6 h-6 object-contain" />
-          </div>
-          <div
-            class="bg-background-light dark:bg-background-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 rounded-lg px-4 py-3 max-w-[85%]">
-            <p class="text-sm">¡Hola! Soy NoticIA. Pregúntame sobre noticias, resúmenes o análisis.</p>
-          </div>
-        </div>
+    <section class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-0 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 overflow-hidden">
+      <!-- Historial de mensajes -->
+      <div id="mensajes" class="h-[55vh] min-h-[320px] max-h-[70vh] overflow-y-auto p-6 space-y-4 bg-surface-light dark:bg-surface-dark">
+        <!-- Mensajes renderizados por JS -->
       </div>
 
       <!-- Composer -->
-      <div
-        class="p-4 bg-surface-light/80 dark:bg-surface-dark/80 border-t border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+      <div class="p-4 bg-surface-light/80 dark:bg-surface-dark/80 border-t border-subtle-text-light/20 dark:border-subtle-text-dark/20">
         <form id="form" class="flex items-end gap-3">
-          <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje..."
-            class="flex-1 resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-3 text-base placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
-          <button id="enviar" type="submit"
-            class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed">
+          <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje..." class="flex-1 resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-3 text-base placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+          <button id="enviar" type="submit" class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed">
             Enviar
           </button>
         </form>
@@ -118,10 +126,177 @@
 
   <!-- Script -->
   <script>
+    // ====== Estado y persistencia ======
+    const LS_KEY = 'noticia_chat_convos_v1';
+    let convos = loadConvos();
+    let currentId = convos.currentId || null;
+
+    if (!currentId || !convos.byId[currentId]) {
+      currentId = newConversation(true);
+    }
+
+    // ====== Elementos ======
     const mensajes = document.getElementById('mensajes');
     const form = document.getElementById('form');
     const entrada = document.getElementById('entrada');
     const enviar = document.getElementById('enviar');
+
+    const header = document.getElementById('app-header');
+    const drawer = document.getElementById('historial-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    const historialToggle = document.getElementById('historial-toggle');
+    const listaConvos = document.getElementById('lista-convos');
+    const nuevaConvBtn = document.getElementById('nueva-conv');
+    const cerrarDrawerBtn = document.getElementById('cerrar-drawer');
+
+    // ====== Utils almacenamiento ======
+    function saveConvos() { localStorage.setItem(LS_KEY, JSON.stringify(convos)); }
+    function loadConvos() {
+      const raw = localStorage.getItem(LS_KEY);
+      if (raw) { try { return JSON.parse(raw); } catch(_){} }
+      return { currentId: null, byId: {} };
+    }
+
+    // ====== Conversaciones ======
+    function newConversation(skipRender = false) {
+      const id = 'c_' + Math.random().toString(36).slice(2, 9);
+      convos.byId[id] = {
+        id,
+        title: 'Nueva conversación',
+        updatedAt: Date.now(),
+        messages: [
+          { role: 'assistant', content: '¡Hola! Soy NoticIA. Pregúntame sobre noticias, resúmenes o análisis.' }
+        ]
+      };
+      convos.currentId = id;
+      currentId = id;
+      saveConvos();
+      if (!skipRender) { renderHistory(); renderConversation(); closeDrawer(); }
+      return id;
+    }
+
+    function deleteConversation(id) {
+      if (!convos.byId[id]) return;
+      const isCurrent = id === currentId;
+      delete convos.byId[id];
+      const remaining = Object.keys(convos.byId);
+      if (!remaining.length) {
+        newConversation(true);
+      }
+      if (isCurrent) {
+        convos.currentId = remaining[0] || Object.keys(convos.byId)[0] || currentId;
+        currentId = convos.currentId;
+      }
+      saveConvos();
+      renderHistory();
+      renderConversation();
+    }
+
+    function renameConversation(id) {
+      const conv = convos.byId[id];
+      if (!conv) return;
+      const nuevo = prompt('Nuevo nombre de la conversación:', conv.title);
+      if (nuevo && nuevo.trim()) {
+        conv.title = nuevo.trim();
+        conv.updatedAt = Date.now();
+        saveConvos();
+        renderHistory();
+      }
+    }
+
+    function switchConversation(id) {
+      if (!convos.byId[id]) return;
+      convos.currentId = id; currentId = id; saveConvos();
+      renderHistory(); renderConversation(); closeDrawer();
+    }
+
+    function updateTitleFromFirstUserMessage(conv) {
+      const firstUser = conv.messages.find(m => m.role === 'user');
+      if (firstUser) {
+        conv.title = (firstUser.content || 'Conversación').slice(0, 40) + (firstUser.content.length > 40 ? '…' : '');
+      }
+    }
+
+    // ====== Drawer (izquierda -> derecha) ======
+    function positionDrawer() {
+      const rect = header.getBoundingClientRect();
+      const top = rect.bottom + window.scrollY; // px desde el top del documento
+      drawer.style.top = top + 'px';
+      drawer.style.setProperty('--top', rect.bottom + 'px');
+      overlay.style.top = top + 'px';
+      overlay.style.height = `calc(100vh - ${rect.bottom}px)`;
+    }
+
+    function openDrawer() {
+      positionDrawer();
+      drawer.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        drawer.classList.remove('translate-x-[-100%]');
+      });
+    }
+    function closeDrawer() {
+      drawer.classList.add('translate-x-[-100%]');
+      overlay.classList.add('hidden');
+      setTimeout(() => drawer.classList.add('hidden'), 300);
+    }
+
+    historialToggle.addEventListener('click', openDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    cerrarDrawerBtn.addEventListener('click', closeDrawer);
+    window.addEventListener('resize', positionDrawer);
+    window.addEventListener('scroll', positionDrawer);
+
+    // ====== Render historial ======
+    function renderHistory() {
+      const items = Object.values(convos.byId)
+        .sort((a,b) => b.updatedAt - a.updatedAt)
+        .map(c => {
+          const active = c.id === currentId ? 'bg-background-light/70 dark:bg-background-dark/70' : 'hover:bg-background-light/60 dark:hover:bg-background-dark/60';
+          const date = new Date(c.updatedAt).toLocaleString();
+          return `
+            <li class="group">
+              <div class="px-3 py-3 ${active} transition flex items-start gap-3">
+                <button data-action="switch" data-id="${c.id}" class="flex-1 flex items-start gap-3 text-left min-w-0">
+                  <div class="flex-none w-8 h-8 rounded-full overflow-hidden bg-primary/15 flex items-center justify-center">
+                    <img src="img/logo.png" alt="Logo IA" class="w-5 h-5 object-contain" />
+                  </div>
+                  <div class="min-w-0">
+                    <div class="truncate font-medium">${c.title}</div>
+                    <div class="text-xs text-subtle-text-light dark:text-subtle-text-dark">${date}</div>
+                  </div>
+                </button>
+                <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+                  <button title="Renombrar" data-action="rename" data-id="${c.id}" class="p-1 rounded hover:bg-background-light/70 dark:hover:bg-background-dark/70">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                  </button>
+                  <button title="Eliminar" data-action="delete" data-id="${c.id}" class="p-1 rounded hover:bg-background-light/70 dark:hover:bg-background-dark/70">
+                    <span class="material-symbols-outlined text-sm">delete</span>
+                  </button>
+                </div>
+              </div>
+            </li>`;
+        }).join('');
+      listaConvos.innerHTML = items || '<li class="px-4 py-3 text-sm text-subtle-text-light dark:text-subtle-text-dark">Sin conversaciones</li>';
+
+      // Bind acciones
+      listaConvos.querySelectorAll('[data-action="switch"]').forEach(b => b.addEventListener('click', () => switchConversation(b.dataset.id)));
+      listaConvos.querySelectorAll('[data-action="rename"]').forEach(b => b.addEventListener('click', () => renameConversation(b.dataset.id)));
+      listaConvos.querySelectorAll('[data-action="delete"]').forEach(b => b.addEventListener('click', () => {
+        const id = b.dataset.id;
+        const ok = confirm('¿Eliminar esta conversación?');
+        if (ok) deleteConversation(id);
+      }));
+    }
+
+    // ====== Conversación (mensajes) ======
+    function renderConversation() {
+      const conv = convos.byId[currentId];
+      if (!conv) return;
+      mensajes.innerHTML = '';
+      for (const m of conv.messages) { appendMensaje(m.content, m.role); }
+      mensajes.scrollTop = mensajes.scrollHeight;
+    }
 
     function appendMensaje(texto, rol = 'user') {
       const wrap = document.createElement('div');
@@ -133,13 +308,8 @@
         : 'bg-background-light dark:bg-background-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 text-text-light dark:text-text-dark'}`;
       bubble.textContent = texto;
 
-      if (rol === 'user') {
-        wrap.appendChild(bubble);
-        wrap.appendChild(avatar('user'));
-      } else {
-        wrap.appendChild(avatar('bot'));
-        wrap.appendChild(bubble);
-      }
+      if (rol === 'user') { wrap.appendChild(bubble); wrap.appendChild(avatar('user')); }
+      else { wrap.appendChild(avatar('bot')); wrap.appendChild(bubble); }
 
       mensajes.appendChild(wrap);
       mensajes.scrollTop = mensajes.scrollHeight;
@@ -149,7 +319,7 @@
       const cont = document.createElement('div');
       cont.className = 'flex-none w-9 h-9 rounded-full flex items-center justify-center overflow-hidden';
       if (tipo === 'user') {
-        cont.classList.add('bg-surface-light', 'dark:bg-surface-dark');
+        cont.classList.add('bg-surface-light','dark:bg-surface-dark');
         cont.innerHTML = '<span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark">person</span>';
       } else {
         cont.classList.add('bg-primary/15');
@@ -175,9 +345,7 @@
           mensajes.appendChild(typing);
           mensajes.scrollTop = mensajes.scrollHeight;
         }
-      } else if (typing) {
-        typing.remove();
-      }
+      } else if (typing) { typing.remove(); }
     }
 
     async function enviarMensaje(e) {
@@ -185,23 +353,29 @@
       const texto = entrada.value.trim();
       if (!texto) return;
 
+      const conv = convos.byId[currentId];
       appendMensaje(texto, 'user');
-      entrada.value = '';
-      entrada.style.height = 'auto';
-      enviar.disabled = true;
-      setTyping(true);
+      conv.messages.push({ role: 'user', content: texto });
+      conv.updatedAt = Date.now();
+      updateTitleFromFirstUserMessage(conv);
+      saveConvos();
+
+      entrada.value = ''; entrada.style.height = 'auto'; enviar.disabled = true; setTyping(true);
 
       try {
-        const respuesta = demoRespuesta(texto);
-        setTyping(false);
-        appendMensaje(respuesta, 'assistant');
+        // Backend real:
+        // const resp = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mensaje: texto, conversation_id: currentId }) });
+        // const data = await resp.json();
+        // const respuesta = data.respuesta;
+
+        const respuesta = demoRespuesta(texto); // Fallback local
+        setTyping(false); appendMensaje(respuesta, 'assistant');
+        conv.messages.push({ role: 'assistant', content: respuesta });
+        conv.updatedAt = Date.now(); saveConvos(); renderHistory();
       } catch (err) {
-        console.error(err);
-        setTyping(false);
+        console.error(err); setTyping(false);
         appendMensaje('Lo siento, ocurrió un error al procesar tu mensaje.', 'assistant');
-      } finally {
-        enviar.disabled = false;
-      }
+      } finally { enviar.disabled = false; }
     }
 
     function demoRespuesta(texto) {
@@ -212,13 +386,19 @@
       return 'Interesante. Cuéntame un poco más o especifica qué deseas obtener (resumen, análisis, verificación, etc.).';
     }
 
+    // Auto-grow del textarea
     entrada.addEventListener('input', () => {
       entrada.style.height = 'auto';
       entrada.style.height = Math.min(240, entrada.scrollHeight) + 'px';
     });
 
     form.addEventListener('submit', enviarMensaje);
+
+    // Render inicial
+    renderHistory();
+    renderConversation();
   </script>
 </body>
+<script src="js/profile-menu.js"></script>
 
 </html>
