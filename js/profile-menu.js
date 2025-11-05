@@ -21,11 +21,11 @@
   var langName = nameFromLang(lang);
 
   function flagFromLang(code) {
-    var map = { es:"🇪🇸", en:"🇬🇧", fr:"🇫🇷", de:"🇩🇪", it:"🇮🇹", pt:"🇵🇹" };
+    var map = { es: "🇪🇸", en: "🇬🇧", fr: "🇫🇷", de: "🇩🇪", it: "🇮🇹", pt: "🇵🇹" };
     return map[code] || "🏳️";
   }
   function nameFromLang(code) {
-    var map = { es:"Español", en:"English", fr:"Français", de:"Deutsch", it:"Italiano", pt:"Português" };
+    var map = { es: "Español", en: "English", fr: "Français", de: "Deutsch", it: "Italiano", pt: "Português" };
     return map[code] || code.toUpperCase();
   }
 
@@ -93,37 +93,43 @@
     '      <div class="text-xl font-semibold text-gray-900 dark:text-text-dark">Hola, ' + escapeHtml(firstName(username)) + "</div>" +
     "    </div>" +
     '    <nav class="flex-1 overflow-y-auto">' +
-      sectionLink("perfilusuario.html#mis-publicaciones", "person", "Perfil") +
-      sectionLink("perfilusuario.html#mis-publicaciones", "article", "Mis publicaciones") +
-      sectionLink("perfilusuario.html#publicaciones-guardadas", "bookmarks", "Publicaciones guardadas") +
-      sectionLink("perfilusuario.html#resumenes-guardados", "notes", "Resúmenes guardados") +
-      // separador
-      '<div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
-      // ===== Selector de Idioma (desplegable)
-      '<div class="px-5 py-1">' +
-      '  <button type="button" id="lang-toggle" aria-expanded="false" ' +
-      '    class="w-full text-left px-0 py-2 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-background-dark/60 rounded">' +
-      '    <span class="material-symbols-outlined">language</span>' +
-      '    <span class="flex-1">Idioma</span>' +
-      '    <span id="lang-current" class="inline-flex items-center gap-2 text-sm">' +
-      '      <span class="text-xl leading-none">' + langFlag + '</span>' +
-      '      <span>' + langName + '</span>' +
-      '    </span>' +
-      '    <span id="lang-arrow" class="material-symbols-outlined transition-transform duration-200">expand_more</span>' +
-      '  </button>' +
-      '  <div id="lang-menu" class="hidden mt-2 border border-gray-200 dark:border-subtle-text-dark/20 rounded-md overflow-hidden">' +
-           langItem("es") + langItem("en") + langItem("fr") + langItem("de") + langItem("it") + langItem("pt") +
-      '  </div>' +
-      '</div>' +
-      // separador
-      '<div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
-      // Cerrar sesión
-      '<button type="button" id="btn-logout" role="menuitem" ' +
-      '  class="w-full text-left px-5 py-3 flex items-center gap-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">' +
-      '  <span class="material-symbols-outlined">logout</span>' +
-      '  <span class="flex-1">Cerrar sesión</span>' +
-      '  <span class="material-symbols-outlined">arrow_forward</span>' +
-      '</button>' +
+    sectionLink("perfilusuario.html#mis-publicaciones", "person", "Perfil") +
+    sectionLink("perfilusuario.html#mis-publicaciones", "article", "Mis publicaciones") +
+    sectionLink("perfilusuario.html#publicaciones-guardadas", "bookmarks", "Publicaciones guardadas") +
+    sectionLink("perfilusuario.html#resumenes-guardados", "notes", "Resúmenes guardados") +
+    // separador
+    '<div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
+    // ===== Idioma + Configuración (mismo bloque)
+    '<div class="px-5 py-1 space-y-1">' +
+    '  <button type="button" id="lang-toggle" aria-expanded="false" ' +
+    '    class="w-full text-left px-0 py-2 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-background-dark/60 rounded">' +
+    '    <span class="material-symbols-outlined">language</span>' +
+    '    <span class="flex-1">Idioma</span>' +
+    '    <span id="lang-current" class="inline-flex items-center gap-2 text-sm">' +
+    '      <span class="text-xl leading-none">' + langFlag + '</span>' +
+    '      <span>' + langName + '</span>' +
+    '    </span>' +
+    '    <span id="lang-arrow" class="material-symbols-outlined transition-transform duration-200">expand_more</span>' +
+    '  </button>' +
+    '  <div id="lang-menu" class="hidden mt-2 border border-gray-200 dark:border-subtle-text-dark/20 rounded-md overflow-hidden">' +
+    langItem("es") + langItem("en") + langItem("fr") + langItem("de") + langItem("it") + langItem("pt") +
+    '  </div>' +
+    '  <a href="configuracion.html" class="w-full text-left px-0 py-2 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-background-dark/60 rounded">' +
+    '    <span class="material-symbols-outlined">settings</span>' +
+    '    <span class="flex-1">Configuración</span>' +
+    '  </a>' +
+    '</div>' +
+
+    // separador
+    '<div class="my-2 border-t border-gray-200 dark:border-subtle-text-dark/20"></div>' +
+
+    // Cerrar sesión
+    '<button type="button" id="btn-logout" role="menuitem" ' +
+    '  class="w-full text-left px-5 py-3 flex items-center gap-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">' +
+    '  <span class="material-symbols-outlined">logout</span>' +
+    '  <span class="flex-1">Cerrar sesión</span>' +
+    '  <span class="material-symbols-outlined">arrow_forward</span>' +
+    '</button>' +
     "    </nav>" +
     "  </div>" +
     "</aside>";

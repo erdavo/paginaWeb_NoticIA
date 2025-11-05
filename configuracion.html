@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NoticIA - Configuración</title>
+
+    <!-- Tailwind + fuentes -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        header nav a {
+            text-decoration: none;
+        }
+
+        header nav a.nav-active {
+            position: relative;
+        }
+
+        header nav a.nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #4cae4f;
+            border-radius: 2px;
+        }
+
+        /* ===== Animaciones para toasts ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+        }
+
+        .toast {
+            animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== Animaciones para modal ===== */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #confirmModal:not(.hidden)>div {
+            animation: modalFadeIn 0.25s ease-out;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#4cae4f",
+                        "background-light": "#f6f7f6",
+                        "background-dark": "#151d15",
+                        "surface-light": "#f1f3f1",
+                        "surface-dark": "#202a20",
+                        "text-light": "#131613",
+                        "text-dark": "#e1e3e1",
+                        "subtle-text-light": "#6c7f6d",
+                        "subtle-text-dark": "#9ca79c",
+                    },
+                    fontFamily: { display: ["Inter", "sans-serif"] },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header
+        class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+        <div class="flex items-center gap-3">
+            <a href="analizar.html"
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
+                <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
+            </a>
+            <a href="analizar.html"
+                class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition no-underline">
+                NoticIA
+            </a>
+        </div>
+
+        <nav class="flex gap-8 text-base font-medium">
+            <a href="analizar.html" class="hover:text-primary transition no-underline">Analizar</a>
+            <a href="foro.html" class="hover:text-primary transition no-underline">Foro</a>
+            <a href="resumir.html" class="hover:text-primary transition no-underline">Resumir</a>
+            <a href="ia.html" class="hover:text-primary transition no-underline">Hablar con la IA</a>
+        </nav>
+
+        <div id="profile-menu-root"></div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex flex-col items-center flex-1 px-4 py-10">
+        <h1 class="text-3xl font-bold mb-8">Configuración</h1>
+
+        <!-- Secciones -->
+        <div class="w-full max-w-2xl space-y-8">
+
+            <!-- 🧑 Perfil -->
+            <section
+                class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50">
+                <h2 class="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    Cambiar nombre de perfil.
+                </h2>
+                <div class="space-y-3">
+                    <label class="block text-sm font-medium">Nombre de usuario</label>
+                    <input type="text" id="nombreUsuario" placeholder="Tu nombre"
+                        class="w-full rounded-lg border border-text-light/30 dark:border-text-dark/30 bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none" />
+                    <button id="guardarPerfil"
+                        class="mt-2 px-5 py-2 bg-primary text-white rounded-full font-semibold hover:opacity-90 active:scale-95 transition">
+                        Guardar cambios
+                    </button>
+                </div>
+            </section>
+
+            <!-- 🌓 Apariencia -->
+            <section
+                class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50">
+                <h2 class="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary">dark_mode</span>
+                    Apariencia
+                </h2>
+                <div class="flex items-center justify-between">
+                    <span>Modo oscuro</span>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="modoOscuro" class="sr-only peer" />
+                        <div
+                            class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-primary relative transition-all duration-300">
+                            <div
+                                class="absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm peer-checked:translate-x-5 transition-transform duration-300">
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- 🌍 Idioma -->
+            <section
+                class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50">
+                <h2 class="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary">language</span>
+                    Idioma
+                </h2>
+                <select id="idiomaSelect"
+                    class="w-full rounded-lg border border-text-light/30 dark:border-text-dark/30 bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="pt">Português</option>
+                </select>
+            </section>
+
+            <!-- 🔒 Privacidad -->
+            <section
+                class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50">
+                <h2 class="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary">lock</span>
+                    Privacidad
+                </h2>
+                <div class="flex flex-col gap-3">
+                    <label class="flex items-center gap-3">
+                        <input type="checkbox" id="mostrarActividad" class="rounded text-primary focus:ring-primary">
+                        <span>Mostrar mi actividad pública</span>
+                    </label>
+                    <label class="flex items-center gap-3">
+                        <input type="checkbox" id="notificaciones" class="rounded text-primary focus:ring-primary">
+                        <span>Permitir notificaciones</span>
+                    </label>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/profile-menu.js"></script>
+    <script src="js/profile-menu.js"></script>
+    <script>
+        // ==== TOASTS ====
+        const toastContainer = document.createElement("div");
+        toastContainer.id = "toast-container";
+        toastContainer.className = "fixed top-5 right-5 z-50 flex flex-col gap-2";
+        document.body.appendChild(toastContainer);
+
+        function showToast(message, type = "info") {
+            const colors = {
+                success: "bg-green-500",
+                error: "bg-red-500",
+                warning: "bg-yellow-500",
+                info: "bg-blue-500",
+            };
+            const toast = document.createElement("div");
+            toast.className =
+                `toast text-white px-4 py-2 rounded-lg shadow-md ${colors[type] || colors.info}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // ==== MODAL ====
+        const modal = document.createElement("div");
+        modal.id = "confirmModal";
+        modal.className =
+            "hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50";
+        modal.innerHTML = `
+    <div class="bg-white dark:bg-surface-dark p-8 rounded-xl shadow-2xl w-[90%] max-w-md text-center">
+      <h3 class="text-xl font-semibold mb-3 text-text-light dark:text-text-dark">
+        ¿Confirmar cambio de nombre?
+      </h3>
+      <p class="text-subtle-text-light dark:text-subtle-text-dark mb-6">
+        Se actualizará tu nombre de perfil a <strong id="nuevoNombrePreview"></strong>.
+      </p>
+      <div class="flex justify-center gap-4">
+        <button id="cancelarModal"
+          class="px-5 py-2 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+          Cancelar
+        </button>
+        <button id="confirmarModal"
+          class="px-5 py-2 bg-primary text-white rounded-full font-semibold hover:opacity-90 active:scale-95 transition">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  `;
+        document.body.appendChild(modal);
+
+        // ==== VARIABLES PRINCIPALES ====
+        const nombreInput = document.getElementById('nombreUsuario');
+        const guardarBtn = document.getElementById('guardarPerfil');
+        const modoOscuro = document.getElementById('modoOscuro');
+        const idiomaSelect = document.getElementById('idiomaSelect');
+        let nombrePrevio = localStorage.getItem('noticia_username') || '';
+        let revertBtn;
+
+        // Cargar valores
+        nombreInput.value = nombrePrevio;
+        modoOscuro.checked = document.documentElement.classList.contains('dark');
+        idiomaSelect.value = localStorage.getItem('noticia_lang') || 'es';
+
+        // ==== GUARDAR PERFIL ====
+        guardarBtn.addEventListener('click', () => {
+            const nuevoNombre = nombreInput.value.trim();
+            if (!nuevoNombre || nuevoNombre === nombrePrevio) {
+                showToast("⚠️ No hay cambios que guardar", "warning");
+                return;
+            }
+
+            document.getElementById("nuevoNombrePreview").textContent = nuevoNombre;
+            modal.classList.remove("hidden");
+        });
+
+        // ==== MODAL ACCIONES ====
+        modal.querySelector("#cancelarModal").addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+
+        modal.querySelector("#confirmarModal").addEventListener("click", () => {
+            modal.classList.add("hidden");
+            const nuevoNombre = nombreInput.value.trim();
+            localStorage.setItem('noticia_username', nuevoNombre);
+
+            showToast("✅ Nombre actualizado correctamente", "success");
+
+            // Mostrar botón Revertir
+            if (!revertBtn) {
+                revertBtn = document.createElement("button");
+                revertBtn.textContent = "↩️ Revertir cambios";
+                revertBtn.className =
+                    "mt-3 px-5 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition font-semibold";
+                guardarBtn.insertAdjacentElement("afterend", revertBtn);
+
+                revertBtn.addEventListener("click", () => {
+                    localStorage.setItem('noticia_username', nombrePrevio);
+                    nombreInput.value = nombrePrevio;
+                    revertBtn.remove();
+                    showToast("🔄 Nombre revertido correctamente", "info");
+                });
+            }
+
+            nombrePrevio = nuevoNombre;
+        });
+
+        // ==== MODO OSCURO ====
+        modoOscuro.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.documentElement.classList.add('dark');
+                showToast("🌙 Modo oscuro activado", "success");
+            } else {
+                document.documentElement.classList.remove('dark');
+                showToast("☀️ Modo claro activado", "info");
+            }
+            localStorage.setItem('noticia_darkmode', e.target.checked ? 'true' : 'false');
+        });
+
+        // ==== IDIOMA ====
+        idiomaSelect.addEventListener('change', (e) => {
+            localStorage.setItem('noticia_lang', e.target.value);
+            showToast("🌍 Idioma cambiado a " + e.target.options[e.target.selectedIndex].text, "info");
+            setTimeout(() => location.reload(), 1200);
+        });
+    </script>
+
+
+</body>
+
+</html>
