@@ -293,14 +293,23 @@ document.addEventListener("DOMContentLoaded", () => {
         barra.style.width = `${progreso}%`;
         porcentajeGrande.textContent = `${progreso}%`;
 
-        if (progreso < 30) barra.style.backgroundColor = "#ef4444";
-        else if (progreso < 70) barra.style.backgroundColor = "#facc15";
-        else barra.style.backgroundColor = "#4cae4f";
-
         porcentaje.textContent = `Analizando... (${progreso}%)`;
 
         if (progreso === resultadoAleatorio) {
           clearInterval(intervalo);
+          // Cambiar color final según resultado real
+          // 🔵 Aplicar color final según el resultado
+          if (resultadoAleatorio < 30) {
+            barra.style.backgroundColor = "#ef4444"; // rojo
+            porcentajeGrande.style.color = "#ef4444";
+          } else if (resultadoAleatorio < 70) {
+            barra.style.backgroundColor = "#facc15"; // amarillo
+            porcentajeGrande.style.color = "#facc15";
+          } else {
+            barra.style.backgroundColor = "#4cae4f"; // verde
+            porcentajeGrande.style.color = "#4cae4f";
+          }
+
 
           setTimeout(() => {
             let mensaje, subtitulo, color, emoji;
