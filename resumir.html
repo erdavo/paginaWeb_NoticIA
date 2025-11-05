@@ -15,6 +15,42 @@
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+    }
+
+    .toast {
+      animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    }
+
+    #resultado::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #resultado::-webkit-scrollbar-thumb {
+      background-color: rgba(100, 100, 100, 0.4);
+      border-radius: 3px;
+    }
+
+    #resultado::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(100, 100, 100, 0.6);
+    }
   </style>
 
   <script>
@@ -23,7 +59,7 @@
       theme: {
         extend: {
           colors: {
-            "primary": "#4cae4f",
+            primary: "#4cae4f",
             "background-light": "#f6f7f6",
             "background-dark": "#151d15",
             "surface-light": "#f1f3f1",
@@ -33,38 +69,28 @@
             "subtle-text-light": "#6c7f6d",
             "subtle-text-dark": "#9ca79c",
           },
-          fontFamily: {
-            "display": ["Inter", "sans-serif"]
-          },
-          borderRadius: {
-            "DEFAULT": "0.5rem",
-            "lg": "0.75rem",
-            "xl": "1rem",
-            "full": "9999px"
-          },
+          fontFamily: { display: ["Inter", "sans-serif"] },
         },
       },
-    }
+    };
   </script>
 </head>
 
 <body
   class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
-  <!-- HEADER (idéntico estilo al foro) -->
+
+  <!-- HEADER -->
   <header
     class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
-    <!-- Logo -->
     <div class="flex items-center gap-3">
-      <a href="index.html"
+      <a href="analizar.html"
         class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
       </a>
-      <a href="index.html" class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
-        NoticIA
-      </a>
+      <a href="analizar.html"
+        class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">NoticIA</a>
     </div>
 
-    <!-- Navegación -->
     <nav class="flex gap-8 text-base font-medium">
       <a href="analizar.html" class="hover:text-primary transition">Analizar</a>
       <a href="foro.html" class="hover:text-primary transition">Foro</a>
@@ -72,26 +98,20 @@
       <a href="ia.html" class="hover:text-primary transition">Hablar con la IA</a>
     </nav>
 
-    <!-- Perfil -->
-    <div class="flex flex-col items-center justify-center gap-1 cursor-pointer hover:opacity-80 transition">
-      <div
-        class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-light dark:bg-surface-dark border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm hover:shadow-md transition">
-        <span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark text-3xl">person</span>
-      </div>
-      <span class="text-sm font-semibold text-text-light dark:text-text-dark">Mi perfil</span>
-    </div>
   </header>
+  <div id="js/profile-menu-root"></div>
+
 
   <!-- CONTENIDO -->
-  <main class="flex flex-col items-center justify-start flex-1 px-4 py-10">
+  <main class="flex flex-col items-center flex-1 px-4 py-10">
     <h1 class="text-3xl font-bold mb-8">Resumir texto</h1>
 
-    <!-- Card de entrada (mismo look & feel que Foro) -->
+    <!-- Card de entrada -->
     <section
-      class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-6 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 mb-8">
+      class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 mb-10">
       <label for="texto" class="block text-base font-medium mb-3">Pega el texto que quieras resumir:</label>
       <textarea id="texto" rows="8" placeholder="Pega aquí el texto que deseas resumir..."
-        class="w-full resize-y rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+        class="w-full resize-none overflow-y-auto rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
 
       <div class="flex items-center justify-between mt-4 gap-4">
         <div class="flex items-center gap-3 text-sm text-subtle-text-light dark:text-subtle-text-dark">
@@ -106,31 +126,65 @@
       </div>
     </section>
 
-    <!-- Resultado del resumen -->
+    <!-- Resultado -->
     <section id="resultado-card" class="w-full max-w-3xl hidden">
       <article
-        class="bg-surface-light dark:bg-surface-dark p-6 rounded-lg border border-subtle-text-light/20 dark:border-subtle-text-dark/20 shadow-sm">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-semibold text-lg">Resultado</h2>
-          <button id="copiar" class="text-primary font-medium hover:underline">Copiar</button>
+        class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-text-light/50 dark:border-text-dark/50 shadow-md fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="flex items-center gap-2 font-semibold text-lg">
+            <span class="material-symbols-outlined text-primary">description</span>
+            Resultado
+          </h2>
+          <div class="flex items-center gap-3">
+            <button id="copiar"
+              class="flex items-center gap-2 px-3 py-2 rounded-full bg-gray-100 dark:bg-surface-dark hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+              <span class="material-symbols-outlined text-lg">content_copy</span>
+              <span class="text-sm font-medium">Copiar</span>
+            </button>
+            <button id="guardar-resumen"
+              class="flex items-center gap-2 px-3 py-2 rounded-full bg-gray-100 dark:bg-surface-dark hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+              <span class="material-symbols-outlined text-lg">bookmark</span>
+              <span class="text-sm font-medium">Guardar</span>
+            </button>
+          </div>
         </div>
-        <p id="resultado" class="text-base leading-relaxed text-text-light dark:text-text-dark"></p>
+        <p id="resultado"
+          class="text-base leading-relaxed text-text-light dark:text-text-dark whitespace-pre-wrap break-words overflow-y-auto max-h-80 pr-2">
+        </p>
       </article>
     </section>
   </main>
 
-  <!-- Script mínimo para mantener funcionalidad -->
+  <!-- TOAST -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2"></div>
+
   <script>
     const btn = document.getElementById('btn-resumir');
     const txt = document.getElementById('texto');
     const out = document.getElementById('resultado');
     const card = document.getElementById('resultado-card');
     const copiarBtn = document.getElementById('copiar');
+    const guardarBtn = document.getElementById('guardar-resumen');
+    const toastContainer = document.getElementById("toast-container");
+
+    function showToast(message, type = "info") {
+      const colors = {
+        success: "bg-green-500",
+        error: "bg-red-500",
+        warning: "bg-yellow-500",
+        info: "bg-blue-500",
+      };
+      const toast = document.createElement("div");
+      toast.className = `toast text-white px-4 py-2 rounded-lg shadow-md ${colors[type] || colors.info}`;
+      toast.textContent = message;
+      toastContainer.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
 
     async function resumir() {
       const contenido = txt.value.trim();
       if (!contenido) {
-        alert('Por favor, pega un texto para resumir.');
+        showToast('⚠️ Por favor, pega un texto para resumir.', "warning");
         return;
       }
 
@@ -139,20 +193,16 @@
       btn.textContent = 'Resumiendo…';
 
       try {
-        // Llama a tu backend real si ya existe:
-        // const resp = await fetch('/api/resumir', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ texto: contenido, breve: document.getElementById('modo-breve').checked }) });
-        // const data = await resp.json();
-        // const resumen = data.resumen;
-
-        // Fallback/placeholder local para demo visual
         const resumen = demoResumen(contenido, document.getElementById('modo-breve').checked);
-
         out.textContent = resumen;
         card.classList.remove('hidden');
         card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        guardarBtn.querySelector("span.material-symbols-outlined").classList.remove("text-yellow-500");
+        guardarBtn.querySelector(".text-sm").textContent = "Guardar";
       } catch (e) {
         console.error(e);
-        alert('Ocurrió un error al resumir.');
+        showToast('❌ Ocurrió un error al resumir.', "error");
       } finally {
         btn.disabled = false;
         btn.textContent = originalLabel;
@@ -160,11 +210,7 @@
     }
 
     function demoResumen(texto, breve) {
-      // Pequeño resumen local por palabras a modo de placeholder
-      const oraciones = texto
-        .replace(/\n+/g, ' ')
-        .split(/(?<=[.!?])\s+/)
-        .filter(Boolean);
+      const oraciones = texto.replace(/\n+/g, ' ').split(/(?<=[.!?])\s+/).filter(Boolean);
       const limite = breve ? 2 : Math.max(3, Math.ceil(oraciones.length * 0.3));
       return oraciones.slice(0, limite).join(' ');
     }
@@ -174,11 +220,40 @@
     copiarBtn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(out.textContent);
-        copiarBtn.textContent = '¡Copiado!';
-        setTimeout(() => (copiarBtn.textContent = 'Copiar'), 1500);
-      } catch (_) { }
+        showToast("📋 Resumen copiado al portapapeles", "success");
+      } catch (_) {
+        showToast("❌ No se pudo copiar el resumen", "error");
+      }
+    });
+
+    guardarBtn.addEventListener("click", () => {
+      const resumenActual = out.textContent.trim();
+      if (!resumenActual) return showToast("⚠️ No hay resumen que guardar", "warning");
+
+      let lista = JSON.parse(localStorage.getItem("resumenesGuardados") || "[]");
+      const existe = lista.some(r => r.texto === resumenActual);
+
+      const icon = guardarBtn.querySelector("span.material-symbols-outlined");
+      const label = guardarBtn.querySelector(".text-sm");
+
+      if (!existe) {
+        const nuevo = { id: Date.now(), texto: resumenActual, fecha: new Date().toLocaleString() };
+        lista.unshift(nuevo);
+        localStorage.setItem("resumenesGuardados", JSON.stringify(lista));
+        icon.classList.add("text-yellow-500");
+        label.textContent = "Guardado";
+        showToast("✅ Resumen guardado correctamente", "success");
+      } else {
+        lista = lista.filter(r => r.texto !== resumenActual);
+        localStorage.setItem("resumenesGuardados", JSON.stringify(lista));
+        icon.classList.remove("text-yellow-500");
+        label.textContent = "Guardar";
+        showToast("🗑️ Resumen eliminado de guardados", "warning");
+      }
     });
   </script>
+  <script src="js/profile-menu.js"></script>
+
 </body>
 
 </html>

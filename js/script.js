@@ -943,6 +943,36 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast("✅ Post publicado correctamente", "success");
         console.log("✅ Post publicado correctamente");
       }, 1000);
+      // =====================================================
+      // 💾 GUARDAR TAMBIÉN EN "Mis publicaciones" (perfil)
+      // =====================================================
+      try {
+        const postParaPerfil = {
+          id: "post_" + Date.now(),
+          author: "Tú",
+          time: "ahora",
+          text: texto,
+          url: enlaceAgregado || "",
+          comments: 0,
+          likes: 0,
+          saves: 0,
+          shares: 0,
+        };
+
+        // Leer publicaciones previas
+        let misPublicaciones = JSON.parse(localStorage.getItem("misPublicaciones") || "[]");
+
+        // Insertar al principio
+        misPublicaciones.unshift(postParaPerfil);
+
+        // Guardar
+        localStorage.setItem("misPublicaciones", JSON.stringify(misPublicaciones));
+
+        console.log("🗂️ Publicación añadida a 'Mis publicaciones'");
+      } catch (e) {
+        console.error("❌ Error guardando en mis publicaciones:", e);
+      }
+
 
     });
   }

@@ -48,17 +48,21 @@
   </script>
 </head>
 
-<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+<body
+  class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
   <!-- HEADER (mismo estilo que Foro) -->
-  <header id="app-header" class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+  <header id="app-header"
+    class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
     <!-- Logo -->
     <div class="flex items-center gap-3">
-    <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
+      <a href="analizar.html"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
-    </a>
-    <a href="index.html" class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
+      </a>
+      <a href="analizar.html"
+        class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
         NoticIA
-    </a>
+      </a>
     </div>
 
     <!-- Navegación -->
@@ -70,34 +74,41 @@
     </nav>
 
     <!-- Perfil -->
-  <div id="profile-menu-root"></div>
+    <div id="profile-menu-root"></div>
   </header>
 
 
   <!-- BOTÓN HISTORIAL (debajo de cabecera, izquierda) -->
   <div class="relative px-8 mt-3">
-    <button id="historial-toggle" class="flex items-center gap-2 px-4 py-2 rounded-full border border-subtle-text-light/30 dark:border-subtle-text-dark/30 bg-surface-light dark:bg-surface-dark hover:bg-surface-light/80 dark:hover:bg-surface-dark/80 shadow-sm active:scale-95 transition">
+    <button id="historial-toggle"
+      class="flex items-center gap-2 px-4 py-2 rounded-full border border-subtle-text-light/30 dark:border-subtle-text-dark/30 bg-surface-light dark:bg-surface-dark hover:bg-surface-light/80 dark:hover:bg-surface-dark/80 shadow-sm active:scale-95 transition">
       <span class="material-symbols-outlined text-primary">menu_open</span>
       <span class="font-medium">Historial</span>
     </button>
   </div>
 
   <!-- Drawer lateral (izquierda -> derecha) -->
-  <aside id="historial-drawer" class="fixed left-0 hidden w-[320px] max-w-[90vw] h-[calc(100vh-var(--top,72px))] overflow-hidden z-30 translate-x-[-100%] transition-transform duration-300">
-    <div class="h-full flex flex-col bg-surface-light dark:bg-surface-dark border-r border-subtle-text-light/30 dark:border-subtle-text-dark/30 shadow-xl">
-      <div class="p-3 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20 flex items-center justify-between">
+  <aside id="historial-drawer"
+    class="fixed left-0 hidden w-[320px] max-w-[90vw] h-[calc(100vh-var(--top,72px))] overflow-hidden z-30 translate-x-[-100%] transition-transform duration-300">
+    <div
+      class="h-full flex flex-col bg-surface-light dark:bg-surface-dark border-r border-subtle-text-light/30 dark:border-subtle-text-dark/30 shadow-xl">
+      <div
+        class="p-3 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <img src="img/logo.png" alt="Logo IA" class="w-6 h-6"/>
+          <img src="img/logo.png" alt="Logo IA" class="w-6 h-6" />
           <span class="text-sm font-semibold">Historial</span>
         </div>
         <div class="flex items-center gap-2">
-          <button id="nueva-conv" class="text-xs px-3 py-1.5 rounded-full bg-primary text-white font-semibold hover:opacity-90 active:scale-95 transition">Nueva conversación</button>
+          <button id="nueva-conv"
+            class="text-xs px-3 py-1.5 rounded-full bg-primary text-white font-semibold hover:opacity-90 active:scale-95 transition">Nueva
+            conversación</button>
           <button id="cerrar-drawer" class="p-1 rounded hover:bg-background-light/70 dark:hover:bg-background-dark/70">
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
       </div>
-      <ul id="lista-convos" class="flex-1 overflow-y-auto divide-y divide-subtle-text-light/10 dark:divide-subtle-text-dark/10">
+      <ul id="lista-convos"
+        class="flex-1 overflow-y-auto divide-y divide-subtle-text-light/10 dark:divide-subtle-text-dark/10">
         <!-- Items renderizados por JS -->
       </ul>
     </div>
@@ -109,17 +120,22 @@
     <h1 class="text-3xl font-bold mb-6">Chat con NoticIA</h1>
 
     <!-- Chat container -->
-    <section class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-0 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 overflow-hidden">
+    <section
+      class="w-full max-w-3xl bg-surface-light dark:bg-surface-dark rounded-lg p-0 shadow-sm border border-subtle-text-light/20 dark:border-subtle-text-dark/20 overflow-hidden">
       <!-- Historial de mensajes -->
-      <div id="mensajes" class="h-[55vh] min-h-[320px] max-h-[70vh] overflow-y-auto p-6 space-y-4 bg-surface-light dark:bg-surface-dark">
+      <div id="mensajes"
+        class="h-[55vh] min-h-[320px] max-h-[70vh] overflow-y-auto p-6 space-y-4 bg-surface-light dark:bg-surface-dark">
         <!-- Mensajes renderizados por JS -->
       </div>
 
       <!-- Composer -->
-      <div class="p-4 bg-surface-light/80 dark:bg-surface-dark/80 border-t border-subtle-text-light/20 dark:border-subtle-text-dark/20">
+      <div
+        class="p-4 bg-surface-light/80 dark:bg-surface-dark/80 border-t border-subtle-text-light/20 dark:border-subtle-text-dark/20">
         <form id="form" class="flex items-end gap-3">
-          <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje..." class="flex-1 resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-3 text-base placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
-          <button id="enviar" type="submit" class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed">
+          <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje..."
+            class="flex-1 resize-none rounded-lg border-none bg-background-light dark:bg-background-dark p-3 text-base placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary outline-none"></textarea>
+          <button id="enviar" type="submit"
+            class="px-6 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed">
             Enviar
           </button>
         </form>
@@ -156,7 +172,7 @@
     function saveConvos() { localStorage.setItem(LS_KEY, JSON.stringify(convos)); }
     function loadConvos() {
       const raw = localStorage.getItem(LS_KEY);
-      if (raw) { try { return JSON.parse(raw); } catch(_){} }
+      if (raw) { try { return JSON.parse(raw); } catch (_) { } }
       return { currentId: null, byId: {} };
     }
 
@@ -253,7 +269,7 @@
     // ====== Render historial ======
     function renderHistory() {
       const items = Object.values(convos.byId)
-        .sort((a,b) => b.updatedAt - a.updatedAt)
+        .sort((a, b) => b.updatedAt - a.updatedAt)
         .map(c => {
           const active = c.id === currentId ? 'bg-background-light/70 dark:bg-background-dark/70' : 'hover:bg-background-light/60 dark:hover:bg-background-dark/60';
           const date = new Date(c.updatedAt).toLocaleString();
@@ -322,7 +338,7 @@
       const cont = document.createElement('div');
       cont.className = 'flex-none w-9 h-9 rounded-full flex items-center justify-center overflow-hidden';
       if (tipo === 'user') {
-        cont.classList.add('bg-surface-light','dark:bg-surface-dark');
+        cont.classList.add('bg-surface-light', 'dark:bg-surface-dark');
         cont.innerHTML = '<span class="material-symbols-outlined text-subtle-text-light dark:text-subtle-text-dark">person</span>';
       } else {
         cont.classList.add('bg-primary/15');

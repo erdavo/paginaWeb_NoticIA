@@ -10,9 +10,63 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* 🌙 Hover sutil en los contenedores */
+    .tab-content:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .dark .tab-content:hover {
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+    }
+
+    /* ✅ Estilo de botón activo */
+    .tab-btn.active {
+      background-color: rgba(76, 174, 79, 0.15);
+      color: #4cae4f;
+      border-color: #4cae4f;
+      font-weight: 600;
+      box-shadow: 0 0 0 2px rgba(76, 174, 79, 0.2);
+    }
+
+    /* 🎞️ Transiciones suaves para el contenido */
+    .tab-content {
+      opacity: 0;
+      transform: translateY(10px);
+      display: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ❌ Eliminar subrayado de los enlaces del header */
+    header nav a {
+      text-decoration: none;
+    }
+
+    /* ✅ Indicador activo en navegación del header */
+    header nav a.nav-active {
+      position: relative;
+    }
+
+    header nav a.nav-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #4cae4f;
+      border-radius: 2px;
     }
   </style>
 
@@ -45,17 +99,6 @@
       },
     };
   </script>
-
-  <style>
-    /* 🌙 Hover sutil en los contenedores */
-    .tab-content:hover {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
-    }
-
-    .dark .tab-content:hover {
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
-    }
-  </style>
 </head>
 
 <body
@@ -65,104 +108,126 @@
   <header
     class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 dark:border-subtle-text-dark/20">
     <div class="flex items-center gap-3">
-    <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
+      <a href="analizar.html"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
-    </a>
-    <a href="index.html" class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
+      </a>
+      <a href="analizar.html"
+        class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition no-underline">
         NoticIA
-    </a>
+      </a>
     </div>
 
     <nav class="flex gap-8 text-base font-medium">
-      <a href="analizar.html" class="text-primary font-bold underline underline-offset-4">Analizar</a>
-      <a href="foro.html" class="hover:text-primary transition">Foro</a>
-      <a href="resumir.html" class="hover:text-primary transition">Resumir</a>
-      <a href="ia.html" class="hover:text-primary transition">Hablar con la IA</a>
+      <a href="analizar.html" class="text-primary font-bold nav-active no-underline">Analizar</a>
+      <a href="foro.html" class="hover:text-primary transition no-underline">Foro</a>
+      <a href="resumir.html" class="hover:text-primary transition no-underline">Resumir</a>
+      <a href="ia.html" class="hover:text-primary transition no-underline">Hablar con la IA</a>
     </nav>
 
-  <div id="profile-menu-root"></div>
+    <div id="profile-menu-root"></div>
   </header>
 
   <!-- MAIN -->
   <main class="flex flex-col items-center justify-start flex-1 px-4 py-10">
     <h1 class="text-3xl font-bold mb-8">Analizar Noticia</h1>
 
-    <!-- Pestañas -->
-    <div id="tabs" class="flex gap-8 mb-8 text-lg font-semibold">
-      <button data-tab="texto" class="tab-btn text-primary underline underline-offset-4">Texto</button>
-      <button data-tab="documento" class="tab-btn hover:text-primary transition">Documento</button>
-      <button data-tab="enlace" class="tab-btn hover:text-primary transition">Enlace</button>
+    <!-- ✅ Pestañas UX/UI limpias -->
+    <div id="tabs" class="flex flex-wrap gap-4 mb-8 text-lg font-semibold justify-center">
+      <!-- 🟢 TEXTO -->
+      <button data-tab="texto"
+        class="tab-btn flex items-center gap-2 px-5 py-3 rounded-full border border-transparent transition-all duration-200 hover:bg-primary/20 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary active:scale-95">
+        <span class="material-symbols-outlined text-xl">edit_note</span>
+        <span>Texto</span>
+      </button>
+
+      <!-- 🔵 DOCUMENTO -->
+      <button data-tab="documento"
+        class="tab-btn flex items-center gap-2 px-5 py-3 rounded-full border border-transparent transition-all duration-200 hover:bg-primary/20 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary active:scale-95">
+        <span class="material-symbols-outlined text-xl">upload_file</span>
+        <span>Documento</span>
+      </button>
+
+      <!-- 🔴 ENLACE -->
+      <button data-tab="enlace"
+        class="tab-btn flex items-center gap-2 px-5 py-3 rounded-full border border-transparent transition-all duration-200 hover:bg-primary/20 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary active:scale-95">
+        <span class="material-symbols-outlined text-xl">link</span>
+        <span>Enlace</span>
+      </button>
     </div>
 
     <!-- Contenido dinámico -->
     <div id="tab-content" class="w-full max-w-2xl">
 
       <!-- 🟢 TEXTO -->
-      <div id="contenido-texto"
-        class="tab-content active bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 hover:border-text-light dark:hover:border-text-dark transition-all duration-300">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="material-symbols-outlined text-text-light dark:text-text-dark">edit_note</span>
-          <label for="texto" class="text-lg font-semibold tracking-tight">Introduce el texto de la noticia:</label>
+      <div id="contenido-texto" class="tab-content">
+        <div
+          class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 hover:border-text-light dark:hover:border-text-dark transition-all duration-300">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-text-light dark:text-text-dark">edit_note</span>
+            <label for="texto" class="text-lg font-semibold tracking-tight">Introduce el texto de la noticia:</label>
+          </div>
+          <textarea id="texto" rows="8" placeholder="Escribe o pega aquí el texto que deseas analizar..."
+            class="w-full resize-none rounded-lg border border-text-light/40 dark:border-text-dark/40 bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-text-light dark:focus:ring-text-dark outline-none focus:bg-surface-light/70 dark:focus:bg-surface-dark/70 transition-all duration-200 shadow-inner"></textarea>
         </div>
-        <textarea id="texto" rows="8" placeholder="Escribe o pega aquí el texto que deseas analizar..."
-          class="w-full resize-none rounded-lg border border-text-light/40 dark:border-text-dark/40 bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-text-light dark:focus:ring-text-dark outline-none focus:bg-surface-light/70 dark:focus:bg-surface-dark/70 transition-all duration-200 shadow-inner"></textarea>
       </div>
 
       <!-- 🔵 DOCUMENTO -->
-      <div id="contenido-documento"
-        class="tab-content hidden bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 hover:border-text-light dark:hover:border-text-dark transition-all duration-300">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="material-symbols-outlined text-text-light dark:text-text-dark">upload_file</span>
-          <h3 class="text-lg font-semibold tracking-tight">Subir documento:</h3>
+      <div id="contenido-documento" class="tab-content">
+        <div
+          class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 hover:border-text-light dark:hover:border-text-dark transition-all duration-300">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-text-light dark:text-text-dark">upload_file</span>
+            <h3 class="text-lg font-semibold tracking-tight">Subir documento:</h3>
+          </div>
+
+          <div id="dropzone"
+            class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-text-light/40 dark:border-text-dark/40 rounded-xl hover:border-text-light dark:hover:border-text-dark transition-all cursor-pointer bg-background-light dark:bg-surface-dark/60 hover:bg-text-light/5 group">
+            <span
+              class="material-symbols-outlined text-5xl text-text-light dark:text-text-dark mb-2 transition-transform group-hover:scale-110">
+              upload_file
+            </span>
+            <p class="text-subtle-text-light dark:text-subtle-text-dark text-sm">Arrastra y suelta un archivo aquí o haz
+              clic para seleccionarlo</p>
+            <input type="file" id="fileInput" class="hidden" />
+          </div>
+
+          <div id="uploaded-files" class="mt-6 flex flex-col gap-3 text-left"></div>
+
+          <p class="mt-4 text-sm text-subtle-text-light dark:text-subtle-text-dark italic text-center">
+            Formatos admitidos: PDF, DOCX, TXT, CSV, imágenes, etc.
+          </p>
         </div>
-
-        <div id="dropzone"
-          class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-text-light/40 dark:border-text-dark/40 rounded-xl hover:border-text-light dark:hover:border-text-dark transition-all cursor-pointer bg-background-light dark:bg-surface-dark/60 hover:bg-text-light/5 group">
-          <span
-            class="material-symbols-outlined text-5xl text-text-light dark:text-text-dark mb-2 transition-transform group-hover:scale-110">
-            upload_file
-          </span>
-          <p class="text-subtle-text-light dark:text-subtle-text-dark text-sm">Arrastra y suelta un archivo aquí o haz
-            clic para seleccionarlo</p>
-          <input type="file" id="fileInput" class="hidden" />
-        </div>
-
-        <div id="uploaded-files" class="mt-6 flex flex-col gap-3 text-left"></div>
-
-        <p class="mt-4 text-sm text-subtle-text-light dark:text-subtle-text-dark italic text-center">
-          Formatos admitidos: PDF, DOCX, TXT, CSV, imágenes, etc.
-        </p>
       </div>
 
       <!-- 🔴 ENLACE -->
-      <div id="contenido-enlace"
-        class="tab-content hidden bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 hover:border-text-light dark:hover:border-text-dark transition-all duration-300">
+      <div id="contenido-enlace" class="tab-content">
+        <div
+          class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-md border border-text-light/50 dark:border-text-dark/50 hover:border-text-light dark:hover:border-text-dark transition-all duration-300">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-text-light dark:text-text-dark">link</span>
+            <label for="enlace" class="text-lg font-semibold tracking-tight">Introduce el enlace de la noticia:</label>
+          </div>
 
-        <div class="flex items-center gap-2 mb-3">
-          <span class="material-symbols-outlined text-text-light dark:text-text-dark">link</span>
-          <label for="enlace" class="text-lg font-semibold tracking-tight">Introduce el enlace de la noticia:</label>
+          <div class="relative">
+            <input id="enlace" type="url" placeholder="https://ejemplo.com/articulo"
+              class="w-full rounded-lg border border-text-light/40 dark:border-text-dark/40 bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-text-light dark:focus:ring-text-dark outline-none focus:bg-surface-light/70 dark:focus:bg-surface-dark/70 transition-all duration-200 shadow-inner" />
+            <span
+              class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-subtle-text-light dark:text-subtle-text-dark pointer-events-none">language</span>
+          </div>
+
+          <p class="mt-3 text-sm text-subtle-text-light dark:text-subtle-text-dark italic">
+            Pega aquí el enlace completo de la noticia que deseas analizar.
+          </p>
         </div>
-
-        <div class="relative">
-          <input id="enlace" type="url" placeholder="https://ejemplo.com/articulo"
-            class="w-full rounded-lg border border-text-light/40 dark:border-text-dark/40 bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-text-light dark:focus:ring-text-dark outline-none focus:bg-surface-light/70 dark:focus:bg-surface-dark/70 transition-all duration-200 shadow-inner" />
-
-          <span
-            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-subtle-text-light dark:text-subtle-text-dark pointer-events-none">language</span>
-        </div>
-
-        <p class="mt-3 text-sm text-subtle-text-light dark:text-subtle-text-dark italic">
-          Pega aquí el enlace completo de la noticia que deseas analizar.
-        </p>
       </div>
     </div>
 
     <!-- Botón principal -->
-    <button
+    <button id="analizarBtn"
       class="mt-8 flex items-center justify-center w-40 h-14 bg-primary text-white rounded-full text-base font-bold tracking-wide hover:opacity-90 active:scale-95 transition-transform">
       Analizar
     </button>
-
     <!-- RESULTADO + BLOQUE REPORTE (igual que antes) -->
     <!-- No modifico para mantener compatibilidad con tu JS actual -->
     <section id="resultado-analisis"
@@ -204,12 +269,14 @@
       <form id="formReporte"
         class="w-full max-w-2xl bg-surface-light dark:bg-surface-dark rounded-xl shadow-md p-8 border border-subtle-text-light/20 dark:border-subtle-text-dark/20 flex flex-col gap-4">
         <div class="flex flex-col">
-          <label for="emailReporte" class="text-base font-medium mb-2">📧 Tu correo electrónico (opcional):</label>
+          <label for="emailReporte" class="text-base font-medium mb-2">📧 Tu correo electrónico
+            (opcional):</label>
           <input id="emailReporte" type="email" placeholder="Introduce tu email si quieres que te contactemos"
             class="w-full rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none" />
         </div>
         <div class="flex flex-col">
-          <label for="mensajeReporte" class="text-base font-medium mb-2">📝 Describe brevemente el error:</label>
+          <label for="mensajeReporte" class="text-base font-medium mb-2">📝 Describe brevemente el
+            error:</label>
           <textarea id="mensajeReporte" rows="4"
             placeholder="Ejemplo: el análisis indicó que era confiable, pero las fuentes no son reales..."
             class="w-full rounded-lg border-none bg-background-light dark:bg-background-dark p-4 text-base text-text-light dark:text-text-dark placeholder:text-subtle-text-light dark:placeholder:text-subtle-text-dark focus:ring-2 focus:ring-primary outline-none resize-none"
@@ -223,10 +290,49 @@
         </div>
       </form>
     </section>
+
   </main>
 
   <script src="js/script.js" defer></script>
+  <script src="js/profile-menu.js"></script>
+
+  <!-- JS de pestañas -->
+  <script>
+    const tabs = document.querySelectorAll(".tab-btn");
+    const contents = document.querySelectorAll(".tab-content");
+
+    // Función para activar una pestaña
+    function activateTab(targetBtn) {
+      // Desactivar todas las pestañas
+      tabs.forEach(btn => {
+        btn.classList.remove("active", "bg-primary/10", "text-primary");
+        btn.classList.add("bg-surface-light", "dark:bg-surface-dark", "text-text-light", "dark:text-text-dark");
+      });
+
+      // Ocultar todo el contenido
+      contents.forEach(content => {
+        content.classList.remove("active");
+      });
+
+      // Activar la pestaña seleccionada
+      targetBtn.classList.add("active", "bg-primary/10", "text-primary");
+      targetBtn.classList.remove("bg-surface-light", "dark:bg-surface-dark", "text-text-light", "dark:text-text-dark");
+
+      // Mostrar el contenido correspondiente
+      const targetContent = document.getElementById(`contenido-${targetBtn.dataset.tab}`);
+      targetContent.classList.add("active");
+    }
+
+    // Agregar event listeners a todos los botones
+    tabs.forEach(btn => {
+      btn.addEventListener("click", () => activateTab(btn));
+    });
+
+    // Activar la primera pestaña por defecto
+    if (tabs.length > 0) {
+      activateTab(tabs[0]);
+    }
+  </script>
 </body>
-<script src="js/profile-menu.js"></script>
 
 </html>

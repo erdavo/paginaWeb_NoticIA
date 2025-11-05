@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <style>
-    .material-symbols-outlined{ font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
   </style>
 
   <script>
@@ -30,8 +33,8 @@
             "subtle-text-light": "#6c7f6d",
             "subtle-text-dark": "#9ca79c",
           },
-          fontFamily: {"display": ["Inter", "sans-serif"]},
-          borderRadius: {"xl":"1rem"},
+          fontFamily: { "display": ["Inter", "sans-serif"] },
+          borderRadius: { "xl": "1rem" },
         },
       },
     }
@@ -41,16 +44,19 @@
 <body class="font-display bg-background-light text-text-light min-h-screen flex flex-col">
 
   <!-- HEADER -->
-  <header id="app-header" class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 bg-white">
+  <header id="app-header"
+    class="flex items-center justify-between px-8 py-4 border-b border-subtle-text-light/20 bg-white">
     <!-- Logo -->
-<!-- Logo + nombre -->
+    <!-- Logo + nombre -->
     <div class="flex items-center gap-3">
-    <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
+      <a href="analizar.html"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition shadow-sm hover:shadow-md active:scale-95">
         <img src="img/logo.png" alt="Logo NoticIA" class="h-6 w-6 object-contain" />
-    </a>
-    <a href="index.html" class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
+      </a>
+      <a href="analizar.html"
+        class="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary transition">
         NoticIA
-    </a>
+      </a>
     </div>
 
 
@@ -105,7 +111,7 @@
 
         <!-- Acciones -->
         <nav class="space-y-1">
-          <a href="editar-perfil.html" class="flex items-center gap-3 px-2 py-2 rounded hover:bg-gray-50">
+          <a href="img/editar-perfil.html" class="flex items-center gap-3 px-2 py-2 rounded hover:bg-gray-50">
             <span class="material-symbols-outlined">edit</span><span>Editar perfil</span>
           </a>
           <a href="preferencias.html" class="flex items-center gap-3 px-2 py-2 rounded hover:bg-gray-50">
@@ -122,14 +128,16 @@
                 <span id="pf-flag" class="text-2xl leading-none">🇪🇸</span>
                 <span id="pf-lang-name">Español</span>
               </span>
-              <span id="pf-lang-arrow" class="material-symbols-outlined transition-transform duration-200">expand_more</span>
+              <span id="pf-lang-arrow"
+                class="material-symbols-outlined transition-transform duration-200">expand_more</span>
             </button>
             <div id="pf-lang-menu" class="hidden mt-2 border border-gray-200 rounded-md overflow-hidden">
               <!-- items se inyectan por JS -->
             </div>
           </div>
 
-          <button id="btn-logout-side" class="w-full text-left flex items-center gap-3 px-2 py-2 rounded hover:bg-red-50 text-red-600">
+          <button id="btn-logout-side"
+            class="w-full text-left flex items-center gap-3 px-2 py-2 rounded hover:bg-red-50 text-red-600">
             <span class="material-symbols-outlined">logout</span>
             <span class="flex-1">Cerrar sesión</span>
             <span class="material-symbols-outlined">arrow_forward</span>
@@ -142,23 +150,17 @@
         <!-- Tabs -->
         <div class="bg-white rounded-t-xl border border-b-0 border-gray-200">
           <div class="flex gap-6 px-6 pt-4">
-            <button
-              data-tab="mine"
-              class="tab-btn border-b-2 border-primary text-gray-900 font-semibold pb-2"
+            <button data-tab="mine" class="tab-btn border-b-2 border-primary text-gray-900 font-semibold pb-2"
               onclick="goToTab('mis-publicaciones')">
               Mis publicaciones
             </button>
 
-            <button
-              data-tab="saved-posts"
-              class="tab-btn text-gray-600 hover:text-gray-900 pb-2"
+            <button data-tab="saved-posts" class="tab-btn text-gray-600 hover:text-gray-900 pb-2"
               onclick="goToTab('publicaciones-guardadas')">
               Publicaciones guardadas
             </button>
 
-            <button
-              data-tab="saved-summ"
-              class="tab-btn text-gray-600 hover:text-gray-900 pb-2"
+            <button data-tab="saved-summ" class="tab-btn text-gray-600 hover:text-gray-900 pb-2"
               onclick="goToTab('resumenes-guardados')">
               Resúmenes guardados
             </button>
@@ -181,34 +183,34 @@
   <!-- Lógica de la página de perfil -->
   <script>
     // ===== Utiles
-    function getLS(key, def){ const v = localStorage.getItem(key); return (v===null||v===undefined)?def:v; }
-    function numLS(key, def){ const n = parseInt(getLS(key, def), 10); return isNaN(n)?def:n; }
-    function flagFromLang(code){
-      const map = { es:"🇪🇸", en:"🇬🇧", fr:"🇫🇷", de:"🇩🇪", it:"🇮🇹", pt:"🇵🇹" };
-      return map[(code||"es").toLowerCase()] || "🏳️";
+    function getLS(key, def) { const v = localStorage.getItem(key); return (v === null || v === undefined) ? def : v; }
+    function numLS(key, def) { const n = parseInt(getLS(key, def), 10); return isNaN(n) ? def : n; }
+    function flagFromLang(code) {
+      const map = { es: "🇪🇸", en: "🇬🇧", fr: "🇫🇷", de: "🇩🇪", it: "🇮🇹", pt: "🇵🇹" };
+      return map[(code || "es").toLowerCase()] || "🏳️";
     }
-    function nameFromLang(code){
-      const map = { es:"Español", en:"English", fr:"Français", de:"Deutsch", it:"Italiano", pt:"Português" };
-      return map[(code||"es").toLowerCase()] || (code||"").toUpperCase();
+    function nameFromLang(code) {
+      const map = { es: "Español", en: "English", fr: "Français", de: "Deutsch", it: "Italiano", pt: "Português" };
+      return map[(code || "es").toLowerCase()] || (code || "").toUpperCase();
     }
-    function escapeHtml(s){
-      return String(s).replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
 
     // ===== Datos de usuario
-    const username = getLS('noticia_username','Usuario');
-    const handle   = getLS('noticia_handle','@nombre_12');
-    const contrib  = numLS('noticia_contributions',100);
-    const joined   = numLS('noticia_join_year',2025);
-    const followers = numLS('noticia_followers',317);
-    const following = numLS('noticia_following',389);
-    const lang      = getLS('noticia_lang','es');
+    const username = getLS('noticia_username', 'Usuario');
+    const handle = getLS('noticia_handle', '@nombre_12');
+    const contrib = numLS('noticia_contributions', 100);
+    const joined = numLS('noticia_join_year', 2025);
+    const followers = numLS('noticia_followers', 317);
+    const following = numLS('noticia_following', 389);
+    const lang = getLS('noticia_lang', 'es');
 
     // Pintar cabecera del panel izquierdo
     document.getElementById('pf-name').textContent = username;
     document.getElementById('pf-handle').textContent = handle;
     document.getElementById('pf-contrib').textContent = `Ha contribuido en ${contrib} ocasiones`;
-    document.getElementById('pf-joined').textContent  = `Se unió en ${joined}`;
+    document.getElementById('pf-joined').textContent = `Se unió en ${joined}`;
     document.getElementById('pf-followers').textContent = followers;
     document.getElementById('pf-following').textContent = following;
     document.getElementById('pf-flag').textContent = flagFromLang(lang);
@@ -218,56 +220,110 @@
     const tabs = document.querySelectorAll('.tab-btn');
     const feed = document.getElementById('feed');
 
-    const postsMine = [
-      { id:'p1', author:'Yo', time:'13h', text:'¡Shawelee!! Mirad esta noticia. ¿Es falsa?', url:'https://noticiafalsa.com', comments:12, likes:106, saves:3, shares:1 },
-      { id:'p2', author:'Yo', time:'1d',  text:'Otro ejemplo de publicación con enlace y métricas.', url:'https://ejemplo.com', comments:8, likes:54, saves:2, shares:0 }
-    ];
+    const postsMine = JSON.parse(localStorage.getItem("misPublicaciones") || "[]");
+
+    if (!postsMine.length) {
+      // Inicializa con ejemplos la primera vez
+      postsMine.push(
+        { id: 'p1', author: 'Yo', time: '13h', text: '¡Shawelee!! Mirad esta noticia. ¿Es falsa?', url: 'https://noticiafalsa.com', comments: 12, likes: 106, saves: 3, shares: 1 },
+        { id: 'p2', author: 'Yo', time: '1d', text: 'Otro ejemplo de publicación con enlace y métricas.', url: 'https://ejemplo.com', comments: 8, likes: 54, saves: 2, shares: 0 }
+      );
+      localStorage.setItem("misPublicaciones", JSON.stringify(postsMine));
+    }
+
     const savedPosts = [];
     const savedSummaries = [];
 
-    function renderPosts(list){
-      if(!list.length){ feed.innerHTML = '<div class="p-8 text-gray-500">No hay contenido por aquí…</div>'; return; }
+    function renderPosts(list) {
+      if (!list.length) {
+        feed.innerHTML = '<div class="p-8 text-gray-500">No hay contenido por aquí…</div>';
+        return;
+      }
+
       feed.innerHTML = list.map(p => `
-        <article class="p-6 space-y-3">
-          <header class="flex items-center gap-3">
-            <div class="flex items-center justify-center w-10 h-10 rounded-full ring-1 ring-gray-300">
-              <span class="material-symbols-outlined">account_circle</span>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-2 text-sm">
-                <span class="font-semibold">${escapeHtml(p.author)}</span>
-                <span class="text-gray-500">· ${escapeHtml(p.time)}</span>
-              </div>
-            </div>
-          </header>
-          <p class="text-[15px] leading-6">${escapeHtml(p.text)}</p>
-          <a href="${p.url}" target="_blank" class="inline-flex items-center gap-2 text-primary hover:underline">
-            <span class="truncate max-w-[60ch]">${escapeHtml(p.url)}</span>
-            <span class="material-symbols-outlined text-base">open_in_new</span>
-          </a>
-          <div class="flex items-center gap-6 text-sm pt-1">
-            <span class="inline-flex items-center gap-1 text-gray-600"><span class="material-symbols-outlined">chat_bubble</span>${p.comments}</span>
-            <span class="inline-flex items-center gap-1 text-gray-600"><span class="material-symbols-outlined">favorite</span>${p.likes}</span>
-            <span class="inline-flex items-center gap-1 text-gray-600"><span class="material-symbols-outlined">bookmark</span>${p.saves}</span>
-            <span class="inline-flex items-center gap-1 text-gray-600"><span class="material-symbols-outlined">ios_share</span>${p.shares}</span>
+    <article class="p-6 space-y-3 relative group border-b border-gray-100 last:border-none">
+      <!-- Botón eliminar -->
+      <button title="Eliminar publicación"
+        class="absolute top-4 right-4 text-gray-400 hover:text-red-600 transition remove-post"
+        data-id="${p.id}">
+        <span class="material-symbols-outlined text-[22px]">delete</span>
+      </button>
+
+      <header class="flex items-center gap-3">
+        <div class="flex items-center justify-center w-10 h-10 rounded-full ring-1 ring-gray-300">
+          <span class="material-symbols-outlined">account_circle</span>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 text-sm">
+            <span class="font-semibold">${escapeHtml(p.author)}</span>
+            <span class="text-gray-500">· ${escapeHtml(p.time)}</span>
           </div>
-        </article>
-      `).join('');
+        </div>
+      </header>
+
+      <p class="text-[15px] leading-6">${escapeHtml(p.text)}</p>
+
+      ${p.url && p.url.trim() !== "" ? `
+  <a href="${escapeHtml(p.url)}" target="_blank"
+     class="inline-flex items-center gap-2 text-primary hover:underline">
+    <span class="truncate max-w-[60ch]">${escapeHtml(p.url)}</span>
+    <span class="material-symbols-outlined text-base">open_in_new</span>
+  </a>
+` : ""}
+
+
+      <div class="flex items-center gap-6 text-sm pt-1">
+        <span class="inline-flex items-center gap-1 text-gray-600">
+          <span class="material-symbols-outlined">chat_bubble</span>${p.comments}
+        </span>
+        <span class="inline-flex items-center gap-1 text-gray-600">
+          <span class="material-symbols-outlined">favorite</span>${p.likes}
+        </span>
+        <span class="inline-flex items-center gap-1 text-gray-600">
+          <span class="material-symbols-outlined">bookmark</span>${p.saves}
+        </span>
+        <span class="inline-flex items-center gap-1 text-gray-600">
+          <span class="material-symbols-outlined">ios_share</span>${p.shares}
+        </span>
+      </div>
+    </article>
+  `).join('');
+
+      // Eventos de eliminar publicación
+      document.querySelectorAll('.remove-post').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id; // id tipo "p1"
+          const confirmDelete = confirm('¿Seguro que quieres eliminar esta publicación?');
+          if (!confirmDelete) return;
+
+          // Buscar por id (string) y eliminar del array
+          const index = postsMine.findIndex(p => p.id === id);
+          if (index !== -1) {
+            postsMine.splice(index, 1);
+
+            // Guardar nueva lista en localStorage
+            localStorage.setItem("misPublicaciones", JSON.stringify(postsMine));
+
+            // Volver a renderizar
+            renderPosts(postsMine);
+          }
+        });
+      });
     }
 
-    function setActive(tab){
-      tabs.forEach(b=>{
-        if(b.dataset.tab===tab){
-          b.classList.add('border-b-2','border-primary','text-gray-900','font-semibold');
+    function setActive(tab) {
+      tabs.forEach(b => {
+        if (b.dataset.tab === tab) {
+          b.classList.add('border-b-2', 'border-primary', 'text-gray-900', 'font-semibold');
           b.classList.remove('text-gray-600');
-        }else{
-          b.classList.remove('border-b-2','border-primary','text-gray-900','font-semibold');
+        } else {
+          b.classList.remove('border-b-2', 'border-primary', 'text-gray-900', 'font-semibold');
           b.classList.add('text-gray-600');
         }
       });
-      if(tab==='mine') renderPosts(postsMine);
-      if(tab==='saved-posts') renderPosts(savedPosts);
-      if(tab==='saved-summ') renderPosts(savedSummaries);
+      if (tab === 'mine') renderPosts(postsMine);
+      if (tab === 'saved-posts') renderPosts(savedPosts);
+      if (tab === 'saved-summ') renderPosts(savedSummaries);
     }
 
     // ===== Navegación con hash
@@ -295,41 +351,41 @@
     }
 
     // Eventos de tabs + hash
-    tabs.forEach(b => b.addEventListener('click', ()=> setActive(b.dataset.tab)));
+    tabs.forEach(b => b.addEventListener('click', () => setActive(b.dataset.tab)));
     window.addEventListener("DOMContentLoaded", syncFromHash);
     window.addEventListener("hashchange", syncFromHash);
 
     // ===== Idioma (panel izquierdo): desplegable
     const pfLangToggle = document.getElementById('pf-lang-toggle');
-    const pfLangMenu   = document.getElementById('pf-lang-menu');
-    const pfLangArrow  = document.getElementById('pf-lang-arrow');
-    const pfFlagEl     = document.getElementById('pf-flag');
+    const pfLangMenu = document.getElementById('pf-lang-menu');
+    const pfLangArrow = document.getElementById('pf-lang-arrow');
+    const pfFlagEl = document.getElementById('pf-flag');
     const pfLangNameEl = document.getElementById('pf-lang-name');
 
     // Pinta items del menú de idioma
-    const langs = ["es","en","fr","de","it","pt"];
+    const langs = ["es", "en", "fr", "de", "it", "pt"];
     pfLangMenu.innerHTML = langs.map(code => (
       `<button type="button" class="w-full text-left px-4 py-2 flex items-center gap-3 hover:bg-gray-50" data-lang="${code}">
          <span class="text-xl">${flagFromLang(code)}</span>
          <span class="flex-1">${nameFromLang(code)}</span>
-         ${code===lang?'<span class="material-symbols-outlined text-primary">check</span>':''}
+         ${code === lang ? '<span class="material-symbols-outlined text-primary">check</span>' : ''}
        </button>`
     )).join('');
 
-    pfLangToggle.addEventListener('click', ()=>{
+    pfLangToggle.addEventListener('click', () => {
       const open = !pfLangMenu.classList.contains('hidden');
       if (open) {
         pfLangMenu.classList.add('hidden');
-        pfLangToggle.setAttribute('aria-expanded','false');
+        pfLangToggle.setAttribute('aria-expanded', 'false');
         pfLangArrow.classList.remove('rotate-180');
       } else {
         pfLangMenu.classList.remove('hidden');
-        pfLangToggle.setAttribute('aria-expanded','true');
+        pfLangToggle.setAttribute('aria-expanded', 'true');
         pfLangArrow.classList.add('rotate-180');
       }
     });
 
-    pfLangMenu.addEventListener('click', (e)=>{
+    pfLangMenu.addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-lang]');
       if (!btn) return;
       const newLang = btn.getAttribute('data-lang');
@@ -342,10 +398,63 @@
     });
 
     // Logout lateral
-    document.getElementById('btn-logout-side').addEventListener('click', ()=>{
+    document.getElementById('btn-logout-side').addEventListener('click', () => {
       localStorage.removeItem('auth_token');
       location.href = 'login.html';
     });
+
+    // ===== Resúmenes guardados (lee del localStorage)
+    function renderSavedSummaries() {
+      const lista = JSON.parse(localStorage.getItem("resumenesGuardados") || "[]");
+      if (!lista.length) {
+        feed.innerHTML = '<div class="p-8 text-gray-500">No tienes resúmenes guardados aún…</div>';
+        return;
+      }
+
+      feed.innerHTML = lista.map(r => `
+    <article class="p-6 space-y-3">
+      <header class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <span class="material-symbols-outlined text-base text-primary">bookmark</span>
+          Guardado el ${escapeHtml(r.fecha)}
+        </div>
+        <button class="text-red-500 hover:text-red-700 text-sm flex items-center gap-1 remove-summary" data-id="${r.id}">
+          <span class="material-symbols-outlined text-base">delete</span>Eliminar
+        </button>
+      </header>
+      <p class="text-[15px] leading-6 whitespace-pre-wrap">${escapeHtml(r.texto)}</p>
+    </article>
+  `).join('');
+
+      // Botones de eliminar
+      document.querySelectorAll(".remove-summary").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = parseInt(btn.dataset.id);
+          let lista = JSON.parse(localStorage.getItem("resumenesGuardados") || "[]");
+          lista = lista.filter(r => r.id !== id);
+          localStorage.setItem("resumenesGuardados", JSON.stringify(lista));
+          renderSavedSummaries();
+        });
+      });
+    }
+
+    // Sobrescribe renderPosts para esta pestaña
+    function setActive(tab) {
+      tabs.forEach(b => {
+        if (b.dataset.tab === tab) {
+          b.classList.add('border-b-2', 'border-primary', 'text-gray-900', 'font-semibold');
+          b.classList.remove('text-gray-600');
+        } else {
+          b.classList.remove('border-b-2', 'border-primary', 'text-gray-900', 'font-semibold');
+          b.classList.add('text-gray-600');
+        }
+      });
+      if (tab === 'mine') renderPosts(postsMine);
+      if (tab === 'saved-posts') renderPosts(savedPosts);
+      if (tab === 'saved-summ') renderSavedSummaries();
+    }
+
   </script>
 </body>
+
 </html>
